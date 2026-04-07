@@ -206,3 +206,49 @@ The 080 unsubscription number is a service that provides unsubscription options 
 
 무료거부 080XXXXXXX
 ```
+
+<h1>Statistics</h1>
+
+**Notification > Notification Hub > Statistics**
+
+
+## Statistics
+
+You can collect various events occurring in Notification Hub and retrieve them as statistical data.
+
+### Retrieve Statistics
+
+You can retrieve the delivery results of sent messages on a per-recipient contact basis.
+
+* Retrieve contact delivery results by combining message channel, delivery timing (immediate, scheduled), delivery purpose, and send/receive/read status.
+* The query period is set based on the request date and time.
+    * The default maximum range for the query period is 7 days.
+    * You can query up to 180 days in the past.
+* You can additionally select one of the detailed conditions to retrieve contact delivery results.
+    * Message ID, template name, flow name, statistics key name, sender information, recipient information
+
+* Retrieve statistical data by combining message channel, statistics criteria, statistics key, and message ID.
+* The available statistics criteria vary depending on the configured message channel.
+
+#### Statistics Events by Message Channel and Statistics Criteria
+
+| Message Channel | Statistics Criteria | Event                                                                                                                 | Note                     |
+| - | - |---------------------------------------------------------------------------------------------------------------------|------------------------|
+| All | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED)                 | Events that occurred during the delivery process.    |
+| SMS | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED)                 |                        |
+| RCS | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED)                 |                        |
+| AlimTalk | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED)                 |                        |
+| Push | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED), Opened (OPENED)    | Message open events are also collected. |
+| Email | Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED), Opened (OPENED)    | Message open events are also collected. |
+| SMS | International SMS Message | Requested (REQUESTED), Canceled (CANCELED), Sent (SENT), Send Failed (SEND_FAILED), Delivered (DELIVERED), Delivery Failed (DELIVERY_FAILED), Actual Send (CONCAT) | Actual Send: The actual number of messages sent through the Concatenated message feature, applicable only to international SMS messages|
+
+### Statistics Key Management
+
+If you set a statistics key when sending messages, you can use the statistics key as a query condition in statistics retrieval to view statistical data for messages sent with the same statistics key.
+
+1. Click **+ Add Statistics Key**.
+2. Set the statistics key name, detailed description, and collection period.
+    * The collection period can be set to unlimited.
+    * This applies to statistics keys set for notices with no deadline or messages that require periodic delivery.
+3. Events generated with a statistics key whose collection period has not yet started or has already passed are not collected.
+    * For campaigns or events running during a specific period, you can set a collection deadline to collect statistical events.
