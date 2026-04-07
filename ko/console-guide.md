@@ -1,506 +1,714 @@
-<a id="compute-instance-console-guide"></a>
-## Compute > Instance > 콘솔 사용 가이드
+## NHN Cloud > 콘솔 정책 가이드
 
-<a id="create-instances"></a>
-## 인스턴스 생성
+NHN Cloud 콘솔은 NHN Cloud 서비스를 이용하기 위한 관리 도구와 작업 창의 역할을 합니다.
+여기에서는 NHN Cloud 콘솔의 기본적인 설정과 사용 방법을 안내합니다.
 
-아래 설정들을 통하여 인스턴스를 생성하거나 인스턴스 템플릿(Instance Template)을 통해 인스턴스를 생성할 수 있습니다. 인스턴스 템플릿을 통해 인스턴스를 생성하려면 인스턴스 생성 화면에서 **인스턴스 템플릿 사용**을 선택합니다. 인스턴스 템플릿 생성 방법은 [인스턴스 템플릿 콘솔 가이드](/Compute/Instance%20Template/ko/console-guide/)를 참고합니다.
+NHN Cloud 콘솔은 아래와 같은 기능을 제공합니다.
 
-<a id="os-settings"></a>
-### OS 설정
+- 서비스를 이용하기 위한 기본 정보 관리(조직, 프로젝트)
+- 서비스 활성화/비활성화
+- 서비스를 이용하는 멤버 관리
+- 결제 정보 제공
 
-인스턴스 생성 시 사용될 루트 블록 스토리지의 생성 방식을 결정합니다.
+## 퀵 가이드
+콘솔에서 제공하는 기본 기능에 대한 퀵 가이드입니다. 
 
-- **신규 생성 및 설정** 또는 **기존 리소스 지정** 중 하나를 선택합니다.
-- **신규 생성 및 설정**을 선택한 경우 이미지를 이용하여 루트 블록 스토리지를 생성합니다.
-- **기존 리소스 지정**을 선택한 경우 기존에 생성된 블록 스토리지 또는 스냅숏을 이용합니다.
+![tutorial_1_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_01_202109.png)
+![tutorial_2_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_02_202109.png)
 
-<a id="image"></a>
-### 이미지
 
-원하는 운영체제가 설치된 이미지를 선택합니다. 이미지는 NHN Cloud에서 제공하는 퍼블릭 이미지, 기존에 만들어 둔 사용자 이미지, 공유 이미지에서 선택할 수 있습니다.
+## 조직 관리
 
-사용할 이미지에 따라 인스턴스 타입(flavor)이 달라지므로 인스턴스 생성 시에는 가장 먼저 이미지를 선택하고 진행하도록 합니다.
+조직은 NHN Cloud 서비스를 효율적으로 사용하고 관리하기 위해 만들어진 그룹입니다.
+조직에서는 동일한 서비스 정책을 사용자에게 공유하여 사용할 수 있습니다.
 
-| 운영체제                         | 블록 스토리지     | 메모리   |
-| ------------------------------ | ---------- | -------- |
-| Linux<br>Ubuntu, Debian, Rocky | 20GB 이상  | 1GB 이상 |
-| Windows                         | 50GB 이상  | 2GB 이상 |
+### 조직 생성
 
-<a id="root-block-storage"></a>
-### 루트 블록 스토리지
+- NHN Cloud 서비스를 이용하기 위해서는 조직을 생성해야 합니다.
+- 조직은 개인/사업자 회원 모두 생성할 수 있습니다.
+- 조직을 생성하는 회원은 자동으로 조직의 OWNER가 됩니다.
+- 조직을 생성하기 위해서는 회원의 결제 수단이 반드시 등록되어 있어야 합니다.
+- 조직은 조직명/도메인 정보를 관리합니다.
+- 조직의 도메인 정보는 서비스에서 사용해야 하는 정보로, 고유한 정보여야 합니다.
 
-**OS 설정**에 따라 루트 블록 스토리지를 설정합니다.
+### 조직 생성 가이드
 
-- **신규 생성 및 설정**을 선택한 경우 **블록 스토리지 타입** 및 **블록 스토리지 크기**를 지정하여 루트 블록 스토리지를 생성합니다.
-- **기존 리소스 지정**을 선택한 경우 **원본 리소스**를 지정하여 루트 블록 스토리지로 사용합니다.
+![console_guide_1_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_03_202109.png)
+![console_guide_2_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_04_202109.png)
 
-#### 원본 리소스
+1. 콘솔로 이동한 뒤 상단 메뉴에서 **조직을 생성해 주세요.** 옆의 **+** 버튼을 클릭합니다.
+2. **조직 생성** 창에서 조직 이름을 입력합니다. 조직 이름은 한글, 영문, 특수문자, 숫자 모두 사용 가능합니다.
+3. **확인** 버튼을 클릭하면 조직 생성이 완료됩니다.
+4. 콘솔 상단 메뉴에 생성된 조직 이름이 표시됩니다.
+5. **설정** 버튼을 클릭하여 생성된 조직 정보를 확인합니다. 조직의 추가 정보로 도메인 정보를 입력합니다. 도메인은 NHN Cloud에서 유일한 값으로 설정해야 합니다.
 
-기존에 생성된 **블록 스토리지** 또는 **스냅숏** 중 하나를 선택할 수 있습니다.
 
-- **블록 스토리지**를 선택 시 기존에 생성된 블록 스토리지를 루트 블록 스토리지로 사용합니다.
-- **스냅숏**을 선택 시 기존에 생성된 스냅숏을 이용하여 루트 블록 스토리지를 생성합니다.
+### 조직 서비스
 
-#### 블록 스토리지 크기
+조직이 생성되면, 서비스를 선택할 수 있습니다.
+조직 단위로 활성화할 수 있는 서비스는 다음과 같습니다.
 
-인스턴스의 루트 블록 스토리지 크기를 결정합니다.
+- Dooray!
+- Contact Center
+- CloudTrail
+- Resource Watcher
 
-- 블록 스토리지 크기는 이미지가 요구하는 최소 크기 이상으로 만들어야 합니다.
 
-인스턴스의 루트 블록 스토리지 크기는 인스턴스 타입에 따라 달라집니다.
 
-| 타입               | 지원하는 블록 스토리지 크기         |
-| -------------------| -------------------------- |
-| u2 타입             | 20 ~ 100 GB (타입별로 고정) |
-| t2, m2, c2, r2, x1 타입 | 20 ~ 2000GB               |
+### 조직 삭제
 
-> [참고]
-> 블록 스토리지 크기에 따라 과금되므로 기본 블록 스토리지의 크기를 무조건 크게 만드는 것은 비효율적입니다. 필요에 따라 블록 스토리지를 추가하여 사용하는 것이 좋습니다.
-> **OS 설정**에서 **기존 리소스 지정**을 **블록 스토리지**로 선택한 경우 블록 스토리지 크기 변경은 불가능합니다.
-> **OS 설정**에서 **기존 리소스 지정**을 **스냅숏**으로 선택한 경우 블록 스토리지 크기는 원본 블록 스토리지 크기보다 같거나 크게 설정되어야 합니다.
+- 조직 삭제는 조직의 OWNER만 할 수 있습니다.
+- 조직을 삭제하기 위해서는 이용하고 있는 서비스를 모두 삭제해야 합니다.
+- 조직 삭제 시, 조직의 모든 정보는 삭제되며 복원할 수 없습니다.
 
-#### 블록 스토리지 타입
+### 조직 거버넌스 설정
 
-인스턴스의 기본 블록 스토리지 타입을 결정합니다.
+NHN Cloud 서비스를 안정적이고 효율적으로 이용하기 위해 필요한 정책을 설정하여 관리할 수 있습니다. 로그인 및 개인정보 등 보안 컴플라이언스 준수를 위한 조직의 공통된 정책을 수립하여 조직 내 멤버가 정책을 준수할 수 있도록 관리합니다.
 
-- **HDD** 또는 **SSD** 중 하나를 선택합니다. 타입에 따라 요금과 성능이 달라집니다.
-- 한번 선택한 블록 스토리지 타입은 변경할 수 없습니다.
+#### IP ACL 설정
+설IP ACL 설정에 등록된 IP에서만 NHN Cloud 서비스를 이용할 수 있습니다.
+콘솔 접속 및 User Access Key 토큰 인증 방식의 Public API 호출 시 IP ACL이 적용됩니다. [인증 방식 지원 현황 보기](https://docs.nhncloud.com/ko/nhncloud/ko/public-api/supported-authentication-methods/)
+Dooray! 서비스는 해당 서비스 콘솔 화면에서 IP ACL을 설정할 수 있습니다.
 
-> [참고] 
-> **OS 설정**에서 **기존 리소스 지정**을 선택한 경우 블록 스토리지 타입 변경은 불가능합니다.
+1. **콘솔**로 이동한 뒤 설정을 원하는 조직의 **조직 관리** 페이지에 접속합니다.
+2. 하위 탭 메뉴에서 **거버넌스 설정**을 선택합니다.
+3. 조직 거버넌스 설정의 **IP ACL 설정**에서 IP ACL을 설정하고 관리할 수 있습니다.
+    * 서비스
+        * 공통 설정: 모든 서비스에 동일하게 IP ACL을 설정할 수 있습니다.
+        * 서비스별 설정: 각 서비스(Cloud, Contiple 등)별로 IP ACL을 설정할 수 있습니다.
+    * IP ACL 설정
+        * 설정 안 함: 모든 IP(또는 IP 대역)에서 콘솔 접근 및 API 호출이 허용됩니다.
+        * 허용한 IP 또는 서비스 게이트웨이만 접근 허용: 등록된 IP(또는 IP 대역)과 서비스 게이트웨이에서만 콘솔 접근 및 API 호출이 허용됩니다.
+            * IP/IP 대역: 허용할 IP 또는 IP 대역을 입력합니다.
+            * 서비스 게이트웨이: 서비스 게이트웨이 ID를 입력합니다.
+                * API Gateway 서비스 연결 및 NAT IP 고정이 설정된 서비스 게이트웨이인 경우에만 IP ACL이 적용됩니다.
+                * 서비스 게이트웨이 ID가 등록된 경우 해당 서비스 게이트웨이에 설정된 NAT IP를 조회하여 IP ACL에 적용됩니다.
 
-<a id="availability-zone"></a>
-### 가용성 영역(availability zone)
+* 주의: 해외 접속 차단을 함께 설정하는 경우 IP ACL에 등록된 IP라도 접속 허용 국가에 포함되지 않으면 콘솔 접속이 제한될 수 있습니다.
 
-가용성 영역을 명시적으로 설정하지 않는 경우, 임의의 영역으로 설정됩니다. 가용성 영역에 따라 이 인스턴스가 사용할 수 있는 블록 스토리지가 결정됩니다. 사용하려는 블록 스토리지가 특정 가용성 영역에 존재한다면 해당 가용성 영역으로 설정하여 사용합니다.
 
-> [참고] 
-> VPC의 자원들은 모든 가용성 영역에서 사용할 수 있습니다.
-> **OS 설정**에서 **기존 리소스 지정**을 선택한 경우 가용성 영역은 변경이 불가능합니다.
+#### 해외 접속 차단 설정
+해외 접속 차단이 필요한 경우 접속 허용 국가에서만 콘솔에 접근하도록 설정하는 기능을 제공합니다.
 
-가용성 영역에 대한 자세한 설명은 [인스턴스 개요의 가용성 영역](./overview/#availability-zone)을 참고합니다.
+* **해외 접속 차단 설정**에서 설정 여부를 선택할 수 있습니다.
+    * 설정 안 함: 모든 국가에서 콘솔 접근이 가능합니다.
+    * 설정: 접속 허용 국가에서만 콘솔 접근이 가능합니다.
+* 접속 허용 국가
+    * 해외 접속 차단을 설정한 경우 접속 허용 국가를 설정할 수 있습니다.
+    * 최소 1개 이상의 접속 허용 국가를 선택해야 합니다.
+* 주의: IP ACL을 함께 설정하는 경우 접속 허용 국가 IP가 IP ACL에 포함되지 않으면 콘솔 접속이 제한될 수 있습니다.
 
-<a id="flavor"></a>
-### 타입(flavor)
+#### 승인 프로세스 관리 설정
+서비스 이용 시 승인 프로세스가 필요한 경우 승인 권한자의 승인 절차를 거치도록 서비스별 기능을 제공합니다.
 
-가상 하드웨어의 성능에 따라 다양한 타입을 선택할 수 있습니다. 다만, 이미지에서 요구하는 가상 하드웨어의 성능에 따라 선택할 수 있는 타입이 제한될 수 있습니다. 보다 자세한 설명은 [인스턴스 개요](./overview)를 참고합니다.
+* **승인 프로세스 관리 설정**에서 설정 안 함/설정을 선택할 수 있습니다.
+* 승인 프로세스 관리 설정에서 **설정**을 선택하면, 각 서비스에서 제공하는 승인 절차를 이용할 수 있습니다.
+* 승인 프로세스 제공 서비스 
+    * Secure Key Manager 
 
-> [참고]
-> 1 vCPU는 스레드 하나와 코어 하나로 구성된 소켓 한 개를 의미하며, 소켓 한 개당 스레드 수와 코어 수는 각각 한 개로 일정합니다.
+#### 인스턴스 이름 관리 설정 
+Instance 서비스 이용 시, Instance명 관리 규칙을 설정할 수 있습니다. 
 
-인스턴스의 타입은 생성 이후에도 NHN Cloud 콘솔에서 변경할 수 있습니다. 높은 타입에서 낮은 타입으로 변경할 수 있고, 낮은 타입에서 높은 타입으로도 변경할 수 있습니다. 일부 타입은 변경할 수 없는 경우도 있으니, 자세한 것은 [인스턴스 타입 변경](./console-guide/#modify-flavor)을 참고합니다.
+* **중복 허용 관리** 선택 시, Instance명을 사용자가 입력한 이름으로 관리하며 중복된 Instance명을 허용합니다. 
+* **Unique 관리** 선택 시, Instance명을 사용자가 입력한 이름과 시스템에서 생성한 문자를 조합하여 유일한 Instance명으로 관리합니다. 
 
-> [주의] 인스턴스의 루트 블록 스토리지는 타입 변경으로 바꿀 수 없습니다.
+#### 리소스 권한 통제 및 접속 단말 제한 설정 
+NHN Cloud 운영자가 장애 대응 등 운영상의 목적으로 고객의 리소스(인스턴스 등) 정보 조회가 필요할 경우, 프로젝트 ADMIN/MEMBER 권한을 가진 사용자에게 이메일 알림 후 보안이 강화된 격리된 환경에서 리소스 정보를 조회하도록 설정합니다.
 
-<a id="number-of-instances"></a>
-### 인스턴스 수
+* 리소스 권한 통제 및 접속 단말 제한 설정에서 설정 안 함/설정을 선택할 수 있습니다.
+* 설정으로 선택할 경우 NHN Cloud 운영자의 고객 리소스 조회 기능이 제한되어, 장애 등의 긴급 상황에서 응대 지연이 발생할 수 있습니다.
 
-이미지, 가용성 영역, 타입, 블록 스토리지 크기, 키페어, 네트워크 설정이 모두 동일한 인스턴스를 여러 개 생성할 경우에 사용합니다. 인스턴스의 이름은 설정한 이름 뒤에 `-1`, `-2`와 같이 번호가 붙어 생성됩니다. 예를 들어, 인스턴스 이름을 `my-instance`로 인스턴스를 2개 만들면, `my-instance-1`, `my-instance-2`가 생성됩니다. 한 번에 생성할 수 있는 최대 인스턴스의 개수는 10개입니다.
+#### 개인정보 보호 설정
+개인정보 보호 설정 기능은 개인정보 보호가 필요한 경우 사용할 수 있습니다.
+서비스상에서 노출되는 개인정보를 마스킹 처리하거나 개인정보 다운로드가 필요할 경우 인터넷망 분리 환경에서만 가능하도록 설정할 수 있습니다. 
 
-임의의 가용성 영역에 인스턴스를 여러 개 생성한 경우, 각각 인스턴스는 임의의 가용성 영역에 만들어집니다. 예를 들어, 2개의 인스턴스를 임의의 가용성 영역으로 생성한 경우, 2개가 같은 가용성 영역에 만들어질 수도 있고 다른 가용성 영역에 만들어질 수도 있습니다. 모든 인스턴스가 같은 가용성 영역에 생성되어야 한다면, 특정 가용성 영역을 선택하여 생성합니다.
+* 개인정보 보호 설정 기능
+    * 조직/프로젝트 > 멤버 관리 > IAM 계정 > 멤버 목록 다운로드 기능
+        * 설정 안 함 선택 시, IAM 계정 목록을 다운로드할 수 있는 모든 멤버가 멤버 목록을 다운로드할 수 있습니다.
+        * 설정 선택 시, 멤버 목록 다운로드 기능이 비활성화되며 예외적으로 허용된 IP 또는 IP 대역에서만 멤버 목록 다운로드가 가능합니다.
+    * 조직 > CloudTrail > 개인 정보
+        * 설정 안 함 선택 시, 로그 목록 조회가 가능한 모든 멤버에게 로그 목록 내 전체 정보를 제공합니다.
+        * 설정 선택 시, 로그 목록 내 개인 정보(이메일, 이름, ID)가 마스킹 처리되어 제공됩니다.
 
-> [참고]
-> **OS 설정**에서 **기존 리소스 지정**을 **블록 스토리지**로 선택하거나 **네트워크 설정**에서 **기존 네트워크 인터페이스 지정**을 선택한 경우 인스턴스 수는 `1`로 제한됩니다.
+### IAM 거버넌스 설정
 
-<a id="key-pair"></a>
-### 키페어
+#### 로그인 보안 설정
 
-기존 키페어를 사용하거나, 새로 키페어를 생성하여 사용합니다. 기존 키페어 등록은 Windows 사용자의 경우 [키페어 가져오기(Windows 사용자)](./console-guide/#import-key-pairs-windows), Mac과 Linux 사용자의 경우 [키페어 가져오기(Mac, Linux 사용자)](./console-guide/#import-key-pairs-mac-and-linux)를 참고합니다.
+* IAM 계정의 콘솔 접속 보안을 강화하기 위해 로그인 보안 설정 기능을 제공합니다.
+* 모든 조직 서비스(Cloud, Contiple, Dooray! 등)에 동일하게 설정하거나, 각 서비스별로 다르게 설정할 수 있습니다.
+![console_guide_4_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_06_202303.png)
 
-> [참고]
-> 키페어는 사용자 계정에 할당된 리소스이므로 프로젝트를 삭제해도 삭제되지 않고 유지됩니다.
+1. 콘솔로 이동한 뒤 설정을 원하는 조직의 조직 관리 페이지에 접속합니다.
+2. 하위 메뉴인 거버넌스 설정을 선택합니다.
+3. IAM 거버넌스 설정의 로그인 보안 설정을 설정하여 관리할 수 있습니다.
 
-<a id="network"></a>
-### 네트워크
+#### 2차 인증
 
-VPC에서 정의된 서브넷 중에서 인스턴스에 연결할 서브넷을 선택합니다. 서브넷을 하나 선택할 때마다 인스턴스에 해당 서브넷에 연결될 네트워크 인터페이스가 만들어집니다. 선택된 서브넷의 순서를 바꾸어서 네트워크 인터페이스를 변경할 수도 있습니다. 이 경우, 첫 번째 네트워크 인터페이스(`eth0`)가 기본 게이트웨이로 설정됩니다.
+2차 인증을 필수로 설정하여 사용하게 할 수 있습니다.
 
-네트워크 생성과 관리에 대한 자세한 설명은 [VPC 개요](/Network/VPC/ko/overview/)를 참고합니다.
+* 서비스
+    * 공통 설정: 모든 조직 서비스에 동일하게 2차 인증을 설정합니다.
+    * 서비스별 설정: 각 서비스 (Cloud, Contiple, Dooray! 등) 별로 2차 인증을 다르게 설정할 수 있습니다.
+* 2차 인증
+    * 설정 안 함: 2차 인증을 하지 않고, 아이디와 비밀번호 입력만으로 로그인할 수 있습니다.
+    * Google OTP: 아이디와 비밀번호를 입력한 후, Google OTP 앱에서 제공한 One Time Password를 입력해 로그인할 수 있습니다.
+    * 이메일/휴대폰: 아이디와 비밀번호를 입력한 후, 이메일 주소로 발송된 **인증** 버튼을 클릭해서 인증 후 로그인할 수 있습니다.
+* 예외 IP
+    * 설정 안 함: 로그인 시 모든 IP 대역에서 2차 인증 후 로그인할 수 있습니다.
+    * 설정: 설정한 IP 또는 IP 대역에서 로그인 시 2차 인증을 하지 않고 로그인할 수 있습니다.
 
-<a id="floating-ip"></a>
-### 플로팅 IP
+#### 최대 로그인 시도
 
-인스턴스 생성 후 플로팅 IP 사용 여부를 지정합니다. 플로팅 IP 사용을 선택하면, 플로팅 IP를 새로 생성하여 첫번째 네트워크 인터페이스에 연결합니다. 이 때 첫번째 네트워크 인터페이스는 반드시 인터넷 게이트웨이가 설정된 서브넷에 연결되어 있어야 합니다.
+로그인을 계속해서 실패했을 때 일정 시간이 지난 후 다시 로그인할 수 있도록 설정할 수 있습니다.
 
-플로팅 IP 관리는 인스턴스 > 관리 페이지 또는 인스턴스 > 플로팅 IP 페이지에서도 할 수 있습니다. 플로팅 IP에 대한 보다 자세한 설명은 [VPC 콘솔 사용 가이드](/Network/VPC/ko/console-guide/)를 참고합니다.
+* 서비스
+    * 공통 설정: 모든 조직 서비스에 동일하게 최대 로그인 시도 설정을 적용합니다. (서비스별 설정 기능 미제공)
+* 최대 로그인 시도
+    * 설정 안 함: 로그인에 실패하더라도 계속해서 로그인을 시도할 수 있습니다.
+    * 설정: 원하는 실패 횟수와 잠금 시간을 입력하면, 설정한 횟수만큼 로그인에 실패했을 때 입력한 잠금 시간 동안 로그인을 시도할 수 없습니다.
 
-<a id="security-group"></a>
-### 보안 그룹
+#### 로그인 세션
 
-인스턴스가 속할 보안 그룹을 지정합니다. 인스턴스 하나는 여러 보안 그룹에 속할 수 있습니다. 인스턴스가 여러 보안 그룹에 속한 경우에는 다음을 참고합니다.
+로그인 세션 설정에 따라 로그인 세션이 유지되거나 자동으로 만료됩니다.
+로그인이 만료된 후에는 다시 로그인해야 콘솔에 접속할 수 있습니다.
+해당 설정은 공통 설정으로 IAM 콘솔에 동일하게 적용되며 서비스별 설정은 지원하지 않습니다.
+* 로그인 세션 수
+    * 여러 기기에서 동일한 ID로 동시에 로그인할 수 있는 개수를 설정합니다.
+    * 1개 설정 시 동일한 ID로 PC, 스마트폰 등 다른 기기에서 동시에 로그인할 수 없습니다.
+    예: PC - 로그인 유지, 스마트폰 - 자동 로그아웃
+* 로그인 세션 유지 시간
+    * 클릭 등의 아무런 작업이 없어도 로그인을 유지할 시간을 설정합니다.
+    * 설정한 시간 동안 클릭 등의 작업을 하지 않으면 자동으로 로그아웃됩니다.
+    * 너무 길게 설정하면 보안상 좋지 않으니 고려하여 설정하세요.
 
-- 각 보안 그룹에 속한 모든 인스턴스와 네트워크 통신이 가능합니다. 다른 인스턴스의 의도하지 않은 접근을 막아야할 민감한 데이터를 가진 인스턴스의 경우에는 신중하게 보안 그룹을 지정해야 합니다.
-- 각 보안 그룹의 모든 룰이 합쳐져서 해당 인스턴스의 외부 통신에 적용됩니다.
+#### 비밀번호 정책 설정
+* IAM 계정의 비밀번호를 설정하기 위해 비밀번호 정책 설정 기능을 제공합니다.
+* 비밀번호 정책은 모든 조직 서비스(Cloud, Contiple, Dooray! 등)에 동일하게 설정됩니다.
 
-보안 그룹에 대한 보다 자세한 설명은 [VPC 콘솔 사용 가이드](/Network/VPC/ko/console-guide/)를 참고합니다.
+* **IAM 거버넌스 설정** > **비밀번호 정책 설정**에서 관리할 수 있습니다.
+    * 기본 비밀번호 정책
+        * 아래와 같은 기본 비밀번호 정책을 제공합니다.
+            * 영문, 숫자, 특수문자를 포함하여 8자리 이상으로 구성합니다.
+            * 대소문자를 구분합니다.
+            * 4자리 이상 연속적인 문자나 숫자(예: 1111, 1234, abcd 등)는 사용할 수 없습니다.
+            * 비밀번호는 90일마다 변경이 필요하며, 90일이 지나면 비밀번호 변경 안내 화면이 제공됩니다.
+    * 사용자 비밀번호 정책
+        * 비밀번호 최소 길이, 비밀번호 강도, 비밀번호 만료, 비밀번호 재사용 제한 등을 설정할 수 있는 비밀번호 정책을 제공합니다.
+            * 비밀번호 최소 길이: 비밀번호 최소 길이를 8~15자로 설정합니다. (최대 길이는 15자로 제공됩니다.)
+            * 비밀번호 강도: 연속된 문자, 대문자, 소문자, 숫자, 특수 문자 등을 조합하여 비밀번호 강도를 설정합니다.
+            * 비밀번호 만료: 비밀번호 만료 여부를 선택하고 설정 시 만료 기간, 만료 시 연장 가능 여부를 설정합니다.
+            * 비밀번호 재사용 제한: 비밀번호 재사용 제한 여부를 선택하고 설정 시 재사용 제한 개수를 1~3개 중 선택하여 설정합니다.
+            * 비밀번호 정책 적용 시점: **비밀번호 변경 시 적용, 즉시 적용** 중 선택하여 비밀번호 정책 적용 시점을 설정합니다.
+                * **비밀번호 변경 시 적용**을 선택한 경우, IAM 계정 비밀번호 변경 시점에 새로운 정책으로 적용됩니다.
+                * **즉시 적용**을 선택한 경우, 비밀번호 설정 후 즉시 적용되어 IAM 계정 로그인 시점에 새로운 정책으로 적용됩니다.
 
-<a id="additional-block-storage"></a>
-### 추가 블록 스토리지
+### 프로젝트 공통 역할 그룹 설정
 
-인스턴스 생성 후 추가 블록 스토리지 연결 여부를 지정합니다. 추가 블록 스토리지 사용을 선택하면 루트 블록 스토리지와 별개인 새로운 블록 스토리지를 생성하여 인스턴스에 연결합니다. 루트 블록 스토리지와 마찬가지로 추가 블록 스토리지를 생성할 때 이름, 스토리지 타입, 크기를 지정할 수 있습니다.
+조직에 속한 프로젝트에서 공통으로 사용할 역할 그룹을 생성하고 관리할 수 있습니다.
+설정된 역할 그룹은 프로젝트의 역할 그룹 관리에서 NHN Cloud 계정 및 IAM 계정을 선택해 역할을 일괄 부여할 수 있습니다.
 
-루트 블록 스토리지는 OS 용도로만 사용하고 추가 블록 스토리지에 자주 사용하는 응용 프로그램이나 데이터를 보관하면 블록 스토리지 연결/해제 또는 스냅샷 기능을 통해 쉽게 이전하거나 복제할 수 있습니다. 또한 인스턴스 장애가 발생했을 때 추가 블록 스토리지만 해제한 뒤 다른 인스턴스에 연결하여 쉽게 서비스를 복구할 수 있습니다.
+1. 조직 설정을 선택한 뒤, 프로젝트 공통 역할 그룹 설정 메뉴를 클릭합니다.
+2. **역할 그룹 추가**를 선택하여, 서비스별 역할을 추가합니다.
+3. 역할 그룹 이름, 설명을 입력하고, 서비스별 역할을 추가합니다.
+    * 역할 그룹 이름은 한글, 영문, 숫자, 특수 문자 모두 사용 가능하며 최대 40자까지 입력할 수 있습니다.
+    * 설명은 역할 그룹에 대한 부연 설명으로 최대 100자까지 입력할 수 있습니다.
+4. 역할은 **서비스별 세분화된 이용 역할**을 선택할 수 있습니다.
+    * 서비스명을 왼쪽 영역에서 검색한 후, 오른쪽 영역에서 역할을 선택합니다.
+5. 선택된 역할을 확인하여 추가하거나 삭제할 수 있습니다.
+    * 서비스명 옆 x 버튼을 클릭하여, 선택된 서비스를 삭제할 수 있습니다.
+6. 추가 버튼을 클릭하여 역할 그룹을 추가합니다.
+7. 역할 그룹이 추가되면, 역할 그룹 리스트에 이름이 표기됩니다. 역할 그룹 이름을 선택하여, 상세 역할 내역을 확인할 수 있습니다.
+8. 역할 추가를 클릭하면, 3번 역할 그룹 추가 화면으로 이동합니다. 역할을 추가하거나 삭제할 수 있습니다.
 
-블록 스토리지 관리는 인스턴스 > 블록 스토리지 페이지에서도 할 수 있습니다. 블록 스토리지에 대한 보다 자세한 설명은 [블록 스토리지 가이드](/Storage/Block%20Storage/ko/overview/)를 참고합니다.
+## 프로젝트 관리
 
-<a id="placement-policy"></a>
-### 배치 정책
+프로젝트는 조직 생성 후, NHN Cloud 서비스를 이용하기 위해서 생성합니다.
+프로젝트에서는 프로젝트 서비스를 활성화하여 이용할 수 있습니다.
+프로젝트 서비스는 프로젝트 단위로 이용하며, 이에 따라 과금합니다.
 
-배치 정책을 사용하여 인스턴스들을 서로 다른 하이퍼바이저로 배치할 수 있습니다. 인스턴스 생성 시 배치 정책을 설정하면 동일 배치 정책에 할당된 인스턴스들은 서로 다른 하이퍼바이저에 생성됩니다.
+### 프로젝트 생성
 
-> [주의]
-> 분산 배치가 불가능한 상황인 경우 인스턴스 생성에 실패할 수 있습니다.
+* 프로젝트 생성을 위해서는 조직을 생성해야 합니다.
+* 프로젝트를 생성하는 회원은 프로젝트의 ADMIN 역할을 가집니다.
+* 프로젝트 생성 시, 프로젝트 이름과 프로젝트 설명을 입력합니다.
+* 프로젝트 생성 후, 프로젝트 서비스를 활성화하여 이용할 수 있습니다.
+* 프로젝트 생성 후, 협업이 필요한 경우 프로젝트 멤버로 추가하여 함께 사용할 수 있습니다.
 
-<a id="user-script"></a>
-### 사용자 스크립트
+#### 프로젝트 생성 가이드
 
-인스턴스 생성 후 실행할 스크립트를 지정합니다. 사용자 스크립트는 인스턴스의 첫 번째 부팅이 완료된 후 네트워크 설정 등 초기화 과정이 끝나고 난 뒤 실행됩니다. NHN Cloud의 사용자 스크립트는 공식 이미지에 내장된 cloud-init (Linux), Cloudbase-init (Windows)과 같은 자동화 도구에 의해서 실행됩니다.
+![console_guide_5_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_07_202109.png)
+![console_guide_6_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_08_202109.png)
 
-> [주의]
-> 사용자 스크립트는 root (Linux)/Administrator (Windows) 사용자 권한으로 실행됩니다.
+1. 조직을 생성하면 **새 프로젝트 생성하기** 버튼이 활성화됩니다. **새 프로젝트 생성하기** 버튼을 클릭하여 프로젝트를 생성합니다.
+2. **프로젝트 이름**과 **프로젝트 설명**을 입력합니다.
+3. **확인** 버튼을 클릭하여 프로젝트를 생성합니다.
+4. 프로젝트가 생성되면 메뉴에 프로젝트 이름이 표시됩니다.
+5. **프로젝트 설정** 버튼을 클릭하여 프로젝트 정보를 확인합니다.
 
-#### Linux
+### 프로젝트 서비스
 
-사용자 스크립트의 첫 번째 줄은 반드시 `#!`으로 시작해야 합니다.
+프로젝트가 생성되면, 서비스를 선택할 수 있습니다.
+프로젝트 단위로 활성화할 수 있는 서비스는 다음과 같습니다.
+
+* Compute
+* Container
+* Network
+* Storage
+* Database
+* Monitoring
+* Hybrid & Private Cloud
+* Game
+* Security
+* Content Delivery
+* Notification
+* AI Service
+* Machine Learning
+* Application Service
+* Mobile Service
+* Search
+* Data & Analytics
+* Dev Tools
+* Management
+* Bill
+
+### 프로젝트 서비스 활성화 가이드
+
+![console_guide_6_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_09_202109.png)
+![console_guide_7_ko.png](http://static.toastoven.net/toast/console_guide/consoleguide_10_202109.png)
+
+1. 프로젝트 생성 후, **서비스 선택** 버튼을 클릭하여 프로젝트에서 사용할 서비스를 선택할 수 있습니다.
+2. 서비스 선택 화면에서 활성화할 서비스를 선택합니다. 서비스를 활성화할지 묻는 메시지가 나타나면 **확인**을 클릭합니다.
+3. 활성화한 서비스 목록은 콘솔 왼쪽 메뉴에서 확인할 수 있습니다. 목록에서 원하는 서비스를 클릭하면 서비스 이용 화면이 나타납니다.
+
+### 프로젝트 삭제
+
+프로젝트에서 이용 중인 서비스가 없을 경우에 프로젝트 삭제가 가능합니다.
+프로젝트 삭제 시, 프로젝트의 모든 리소스는 삭제되며 복원이 불가능합니다.
+현재까지 이용한 모든 리소스에 대한 이용 내역을 즉시 결제하고 삭제할 수 있습니다.
+단, 즉시 결제하지 않고 삭제할 경우 현재까지 이용한 요금 내역은 다음 결제일에 자동 청구됩니다.
+
+## 멤버 관리
+
+멤버 관리를 통해 사용자별 인증(로그인) 및 역할을 통제할 수 있습니다.
+프로젝트와 조직에서 멤버 관리를 별도로 할 수 있습니다.
+멤버는 NHN Cloud 계정과 IAM 계정으로 구분됩니다.
+
+### NHN Cloud 계정과 IAM 계정 정책
+
+| 구분 | [NHN Cloud](http://nhncloud.com) 계정 | IAM 계정 |
+| --- | --- | --- |
+| 정의 | - 조직 관리를 위한 멤버<br>- NHN Cloud 이용 약관에 동의한 NHN Cloud 회원으로, 서비스 이용에 대한 책임과 의무를 가지는 멤버<br>- NHN Cloud 서비스 전체에서 유효한 멤버로 소속된 조직이 삭제되어도 NHN Cloud 계정으로 존재 | - 서비스 이용을 위한 멤버<br>- NHN Cloud 이용 약관에 동의하지 않은 멤버<br>- 조직 내에서만 유효한 멤버, 소속된 조직이 삭제되면 삭제되는 멤버 |
+| 멤버 등록 방법 | - 조직의 OWNER나 ADMIN, ORG_MEMBER_ADMIN이 NHN Cloud ID를 입력하여 등록 | - 조직의 OWNER나 ADMIN, ORG_MEMBER_ADMIN이 조직 내 유일한 ID를 입력하여 등록<br>- SSO 연동/API 연동 등을 통해 등록 |
+| 멤버 역할 | - 조직 관리(조직 생성/수정/조직 멤버 관리/조직 서비스 관리/결제 관리)<br>- 프로젝트 생성<br>- 프로젝트 삭제 | - 조직 서비스 이용 |
+| 콘솔 접근 | - NHN Cloud 콘솔([https://console.nhncloud.com/](https://console.nhncloud.com/)) 접근<br>- NHN Cloud> 회원 ID/비밀번호로 로그인<br>- (선택) 2차(이메일 또는 SMS) 인증 | - IAM 콘솔(https://조직도메인.console.nhncloud.com/) 접근<br>- Dooray!, ERP 서비스는 해당 서비스 도메인으로 접근<br>- 조직의 OWNER(또는 ADMIN)가 설정한 ID/PW로 로그인 - 조직에서 설정한 로그인 보안(2차 인증, 서비스별 설정) 인증 |
+
+### 조직 멤버
+
+* IAM 계정은 조직 서비스별(Contiple 등)로 설정할 수 있는 역할이 다릅니다.
+* NHN Cloud 계정과 IAM 계정의 클라우드 서비스 역할은 아래와 같습니다.
+* 단, IAM 계정은 최초 등록 시 None 역할을 부여받으며, 등록 후 역할 설정을 통해 필요한 역할을 부여해야 합니다.
+
+#### 조직 관리 역할
+
+| 역할 | 설명 |
+| --- | --- |
+| OWNER | 조직 생성, 조직 관리, 멤버 관리, 조직 역할 그룹 관리, 조직 서비스 관리, 결제 관리, 프로젝트 관리 등 조직 전체에 대한 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| ADMIN | 조직 관리, 멤버 관리, 조직 역할 그룹 관리, 조직 서비스 관리, 결제 관리, 프로젝트 관리 등 조직 전체에 대한 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| MEMBER | 프로젝트 Create(생성), 조직 대시보드 Read(읽기), 프로젝트에 대한 Read(읽기) |
+| ORG_MEMBER_ADMIN | 조직 멤버 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br>조직 역할 그룹 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| ORG_MEMBER_VIEWER | 조직 멤버 Read(읽기)<br>조직 역할 그룹 Read(읽기) |
+| BILLING_VIEWER | 결제 관리 이용현황 Read(읽기), 예산 관리에 대한 Read(읽기), 조직 하위 프로젝트의 이용 현황 Read(읽기) |
+| BUDGET_ADMIN | 예산 관리에 대한 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| BUDGET_VIEWER | 예산 관리에 대한 Read(읽기) |
+| LOG_VIEWER | 사용자 Action 로그 관리 Read(읽기), 리소스 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| ORG_DASHBOARD_ADMIN | 조직 대시보드 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| ORG_DASHBOARD_VIEWER | 조직 대시보드 Read(읽기) |
+| ORG_SUPPORT_ADMIN | 조직 문의 Create(생성) |
+| NONE | 조직 대시보드 Read(읽기), 조직 기본 설정 Read(읽기) |
+
+#### 조직 서비스 이용 역할
+
+| 서비스 | 역할 | 설명 |
+| --- | --- | --- |
+| Contiple | ADMIN | Contiple 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Contiple | VIEWER | Contiple 서비스 Read(읽기) |
+| CloudTrail | ADMIN | CloudTrail 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| CloudTrail | VIEWER | CloudTrail 서비스 Read(읽기) |
+| CloudTrail | External Storage Config ADMIN | CloudTrail 서비스 외부 저장소 설정 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Resource Watcher | ADMIN | Resource Watcher 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Resource Watcher | VIEWER | Resource Watcher 서비스 Read(읽기) |
+
+#### 조직 서비스 활성화 역할
+* 조직 서비스 PERMISSION 역할은 개별 서비스를 활성화 또는 비활성화할 수 있습니다.
+* 단, 조직 생성 시 활성화되어있는 서비스(CloudTrail, Resource Watcher 등)는 별도의 PERMISSION 역할을 제공하지 않습니다.
+
+| 역할 | 설명 |
+| --- | --- |
+| 서비스명 PERMISSION | 서비스 Enable(활성화), Disable(비활성화) |
+
+### 프로젝트 멤버
+
+* 프로젝트 멤버에게 필요한 역할을 여러 개 부여할 수 있습니다.
+
+#### 프로젝트 관리 역할
+
+| 역할 | 설명 |
+| --- | --- |
+| ADMIN | 프로젝트 전체에 대한 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| MARKETPLACE_ADMIN | 마켓플레이스 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| MARKETPLACE_VIEWER | 마켓플레이스 서비스 Read(읽기) |
+| MEMBER | 프로젝트 내 모든 서비스의 리소스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)- 일부 서비스 제외(연관 역할/권한 확인) |
+| BILLING VIEWER | 이용 현황 Read(읽기)  |
+| PROJECT MANAGEMENT ADMIN | 프로젝트 기본 정보 Update(갱신)<br>프로젝트 통합 Appkey Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br>프로젝트 서비스 활성화(Enable), 비활성화(Disable)<br>프로젝트 Delete(삭제)  |
+| PROJECT MANAGEMENT VIEWER | 프로젝트 기본 정보 Read(읽기)<br>프로젝트 통합 Appkey Read(읽기)  |
+| PROJECT MEMBER ADMIN | 프로젝트 멤버 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br>프로젝트 역할 그룹 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| PROJECT MEMBER VIEWER | 프로젝트 멤버 Read(읽기)<br>프로젝트 역할 그룹 Read(읽기)  |
+| PROJECT NOTICE GROUP MANAGEMENT ADMIN | 프로젝트 알림 수신 그룹 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 프로젝트 멤버 Read(읽기) <br> 프로젝트 역할 그룹 Read(읽기)| 
+| PROJECT NOTICE GROUP MANAGEMENT VIEWER | 프로젝트 알림 수신 그룹 관리 Read(읽기) <br> 프로젝트 역할 그룹 Read(읽기)| 
+| PROJECT NOTICE MANAGEMENT ADMIN | 프로젝트 알림 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 프로젝트 멤버 Read(읽기) <br> 프로젝트 역할 그룹 Read(읽기)| 프로젝트 알림 수신 그룹 관리 Read(읽기)
+| PROJECT NOTICE MANAGEMENT VIEWER | 프로젝트 알림 관리 Read(읽기) <br> 프로젝트 역할 그룹 Read(읽기)| 프로젝트 알림 수신 그룹 관리 Read(읽기)
+| PROJECT API SECURITY SETTING ADMIN | 프로젝트 API 보안 설정 Create(생성)/Read(읽기)/Update(갱신)/Delete(삭제)|
+| PROJECT API SECURITY SETTING VIEWER | 프로젝트 API 보안 설정 Read(읽기)|
+| PROJECT AUTHENTICATION MANAGEMENT ADMIN | 프로젝트 인증 정보 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제)|
+| PROJECT QUOTA MANAGEMENT ADMIN| 프로젝트 쿼터 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제)|
+| PROJECT QUOTA MANAGEMENT VIEWER| 프로젝트 쿼터 관리 Read(읽기)|
+| PROJECT_SUPPORT_ADMIN| 프로젝트 문의 Create(생성)|
+
+
+
+#### 프로젝트 서비스 이용 역할
+
+| 서비스 | 역할 | 설명 |
+| --- | --- | --- |
+| Infrastructure | ADMIN | 기본 인프라 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Infrastructure | MEMBER | 네트워크 서비스(Network Interface, Floating IP 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | VIEWER | 기본 인프라 서비스(Key Pair, Direct Connect, NAS (Offline) 제외) Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Routing ADMIN | 네트워크 서비스(Network Interface, Floating IP, Routing Table 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Security Group ADMIN | 네트워크 서비스(Network Interface, Floating IP, Security Groups 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Load Balancer ADMIN | 네트워크 서비스(Network Interface, Floating IP, Load Balancer 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Transit Hub ADMIN | 네트워크 서비스(Network Interface, Floating IP, Transit Hub 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Peering Gateway ADMIN | 네트워크 서비스(Network Interface, Floating IP, Peering Gateway 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Colocation Gateway ADMIN | 네트워크 서비스(Network Interface, Floating IP, Colocation Gateway 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | NAT Gateway ADMIN | 네트워크 서비스(Network Interface, Floating IP, NAT Gateway 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Service Gateway ADMIN | 네트워크 서비스(Network Interface, Floating IP, Service Gateway 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Private DNS ADMIN | 네트워크 서비스(Network Interface, Floating IP, Private DNS 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | Flow Log ADMIN | 네트워크 서비스(Network Interface, Floating IP, Flow Log 제외) 및 NKS, NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | NCS ADMIN | 네트워크 서비스(Network Interface, Floating IP 제외) 및 NKS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure | NKS ADMIN | 네트워크 서비스(Network Interface, Floating IP 제외) 및 NCS, Storage Gateway Read(읽기) <br> 이 외 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Virtual Desktop | ADMIN | Virtual Desktop 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Cloud Functions | ADMIN | Cloud Functions 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| NHN Container Registry (NCR) | ADMIN | NHN Container Registry (NCR) 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| NHN Container Registry (NCR) | VIEWER | NHN Container Registry (NCR) 서비스 Read(읽기) |
+| NHN Container Registry (NCR) | IMAGE UPLOADER | NHN Container Registry (NCR) 서비스 Read(읽기) <br> 이미지 업로드, 아티팩트 Create(생성), 태그 Create(생성) |
+| DNS Plus | ADMIN | DNS Plus 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| DNS Plus | VIEWER | DNS Plus 서비스 Read(읽기) |
+| Object Storage | ADMIN | Object Storage 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Object Storage | Container OPERATOR | Object Storage 서비스 내 컨테이너 목록 및 모든 정보 상세 조회 Read(읽기). 컨테이너 관리 Create(생성), Update(갱신), Delete(삭제) |
+| Object Storage | Container VIEWER | Object Storage 서비스 내 컨테이너 목록 조회 Read(읽기)  |
+| Object Storage | Object READER | Object Storage 서비스 내 컨테이너 목록 및 일부 정보 상세 조회 Read(읽기) <br> 객체 목록 및 상세 조회 Read(읽기) <br> 객체 다운로드 Read(읽기)  |
+| Object Storage | Object WRITER | Object Storage 서비스 내 컨테이너 목록 및 일부 정보 상세 조회 Read(읽기) <br> 객체 관리 Create(생성), Update(갱신), Delete(삭제)  |
+| Object Storage | Object VIEWER | Object Storage 서비스 내 컨테이너 목록 및 일부 정보 상세 조회 Read(읽기) <br> 객체 목록 및 상세 조회 Read(읽기)  |
+| Backup | ADMIN | Backup 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| RDS for MySQL | ADMIN | RDS for MySQL 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| RDS for MySQL | VIEWER | RDS for MySQL 서비스 Read(읽기) |
+| RDS for PostgreSQL | ADMIN | RDS for PostgreSQL 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| RDS for PostgreSQL | VIEWER | RDS for PostgreSQL 서비스 Read(읽기) |
+| RDS for MariaDB | ADMIN | RDS for MariaDB 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| RDS for MariaDB | VIEWER | RDS for MariaDB 서비스 Read(읽기) |
+| RDS for MS-SQL | ADMIN | RDS for MS-SQL 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| EasyCache | ADMIN | EasyCache 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| EasyCache | VIEWER | EasyCache 서비스 복제 그룹 메뉴 Read(읽기), 모니터링 메뉴 Read(읽기) |
+| Cloud Monitoring | ADMIN | Cloud Monitoring 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Cloud Monitoring | VIEWER | Cloud Monitoring Read(읽기) |
+| Gamebase | ADMIN | Gamebase 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | ANALYTICS VIEWER - ALL | 모든 지표 Read(읽기) |
+| Gamebase | ANALYTICS VIEWER - EXCLUDING SALES | 매출을 제외한 모든 지표 Read(읽기) |
+| Gamebase | ANALYTICS VIEWER - ONLY REAL-TIME | 실시간 지표 Read(읽기) |
+| Gamebase | APP ADMIN | APP 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | APP VIEWER | APP 메뉴 Read(읽기) |
+| Gamebase | BAN ADMIN | 이용 정지 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | BAN VIEWER | 이용 정지 메뉴 Read(읽기) |
+| Gamebase | COUPON ADMIN | 쿠폰 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | COUPON VIEWER | 쿠폰 메뉴 Read(읽기) |
+| Gamebase | CS ADMIN | 고객센터 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | CS INQUIRY SUPPORT | 고객센터 문의 메뉴 Read(읽기), Update(갱신) 및 멤버 메뉴 Read(읽기) |
+| Gamebase | IAP ADMIN | 구매 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | IAP VIEWER | 구매 메뉴 Read(읽기) |
+| Gamebase | LEADERBOARD ADMIN | 리더보드 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | LEADERBOARD VIEWER | 리더보드 메뉴 Read(읽기) |
+| Gamebase | MANAGEMENT ADMIN | 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | MEMBER ADMIN | 멤버 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | MEMBER VIEWER | 멤버 메뉴 Read(읽기) |
+| Gamebase | MEMBER FILE DOWNLOAD | 지표, 매출, 멤버 등에 대한 메뉴 Read(읽기) 및 다운로드 |
+| Gamebase | OPERATION ADMIN | 운영 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | OPERATION VIEWER | 운영 메뉴 Read(읽기) |
+| Gamebase | PUSH ADMIN | 푸시 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Gamebase | PUSH VIEWER | 푸시 메뉴 Read(읽기) |
+| GameAnvil  | ADMIN | GameAnvil 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| GameAnvil  | MEMBER | GameAnvil 서비스 Read(읽기), 모니터링 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| GameAnvil  | VIEWER | GameAnvil 서비스 Read(읽기)  |
+| GameStarter  | ADMIN | 게임 설정, 배포 메뉴 Create(생성),  Read(읽기),  Update(갱신)  |
+| GameStarter  | VIEWER | 게임 설정, 배포 메뉴 Read(읽기)  |
+| Leaderboard | ADMIN | Leaderboard 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Leaderboard | VIEWER | Leaderboard 서비스 Read(읽기) |
+| Launching | ADMIN | Launching 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Smart Downloader | ADMIN | Smart Downloader 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| NHN AppGuard | ADMIN | AppGuard 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Server Security Check | ADMIN | Server Security Check 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Server Security Check | VIEWER | Server Security Check 서비스 Read(읽기)|
+| Security Monitoring | ADMIN | Security Monitoring 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| CAPTCHA | ADMIN | CAPTCHA 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| WEB Firewall | ADMIN | WEB Firewall 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Vaccine | ADMIN | Vaccine 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Secure Key Manager | ADMIN | Secure Key Manager 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Secure Key Manager | APPROVAL ADMIN | Secure Key Manager 서비스 승인 요청에 대한 승인, 거부, 조회 및 승인 요청 생성, 조회  |
+| Secure Key Manager | APPROVAL MEMBER | Secure Key Manager 서비스 승인 요청 생성, 조회  |
+| Secure Key Manager | VIEWER | Secure Key Manager 서비스 Read(읽기) |
+| Security Compliance | ADMIN | Security  Compliance 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Webshell Threat Detector | ADMIN | Webshell Threat Detector 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Security Advisor | ADMIN | Security Advisor 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Security Advisor | VIEWER | Security Advisor 서비스 Read(읽기)  |
+| Network Firewall | ADMIN | Network Firewall 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Network Firewall | VIEWER | Network Firewall 서비스 Read(읽기)  |
+| NHN Bastion | ADMIN | NHN Bastion 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) | 
+| NHN Bastion | VIEWER | NHN Bastion 서비스 Read(읽기) | 
+| NHN Bastion | USER | NHN Bastion 서비스 터미널 이용 |
+| Cloud Access | ADMIN | Cloud Access 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Cloud Access | VIEWER | Cloud Access 서비스 Read(읽기) | 
+| CDN | ADMIN | CDN 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Image Manager | ADMIN | Image Manager 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Notification Hub | ADMIN | Notification Hub 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Push | ADMIN | Push 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| SMS | ADMIN | SMS 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| SMS | SEND ADMIN | SMS 서비스 발송 메뉴 Create(생성), Read(읽기) |
+| SMS | DELIVERY RESULT ADMIN |  SMS 서비스 SMS 요청별 조회  메뉴 Read(읽기), 조회 결과 다운로드 Create(생성) <br> 대량 SMS 발송 조회 메뉴 Read(읽기), 조회 결과 다운로드 Create(생성) <br> 태그 SMS 발송 조회 메뉴 Read(읽기), 조회 결과 다운로드 Create(생성) |
+| SMS | SETTING ADMIN | SMS 서비스 템플릿 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 발신번호 사전 등록 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 발신번호 조회 메뉴 Read(읽기), 태그 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> UID 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 웹훅 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> 080 수신 거부 설정 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 발송 설정 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제 <br> 통계 이벤트 키 설정 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| SMS | STATISTICS ADMIN | SMS 서비스 통계 메뉴 Read(읽기), 조회 결과 다운로드 Create(생성) |
+| RCS Bizmessage | ADMIN | RCS Bizmessage 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Email | ADMIN | Email 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Email | SEND ADMIN | Email 서비스 메일 발송 메뉴 Create(생성), Read(읽기)  |
+| Email | DELIVERY RESULT ADMIN | Email 서비스 메일 요청별 조회 메뉴  Read(읽기), 조회 결과 다운로드 Create(생성) <br> 메일 예약 발송 조회 메뉴  Read(읽기), 조회 결과 다운로드 Create(생성) <br> 대량 메일 발송 조회 메뉴  Read(읽기), 조회 결과 다운로드 Create(생성) <br> 태그 메일 발송 조회 메뉴  Read(읽기), 조회 결과 다운로드 Create(생성)  |
+| Email | SETTING ADMIN | Email 서비스 템플릿 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 수신 거부 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 메일 도메인 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 태그 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br>UID 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br>발송 설정 Create(생성), Read(읽기), Update(갱신), Delete(삭제) <br> 웹훅 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Email | STATISTICS ADMIN | Email 서비스 통계 조회 메뉴 Read(읽기), 조회 결과 다운로드 Create(생성)  |
+| KakaoTalk Bizmessage | ADMIN | KakaoTalk Bizmessage 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| KakaoTalk Bizmessage | SEND ADMIN | KakaoTalk Bizmessage 서비스 (알림톡)발송 메뉴 Create(생성), Read(읽기)|
+| KakaoTalk Bizmessage | DELIVERY RESULT ADMIN | KakaoTalk Bizmessage 서비스 (알림톡)발송 결과 조회  Read(읽기), 조회 내역 다운로드 Create(생성)<br> (알림톡)대량 발송 조회  Read(읽기), 조회 결과 다운로드 Create(생성)<br> (친구톡)발송 결과 조회  Read(읽기), 조회 결과 다운로드 Create(생성) |
+| KakaoTalk Bizmessage | SETTING ADMIN | KakaoTalk Bizmessage 서비스 발신 프로필 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> (알림톡)템플릿 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> (알림톡)대체 발송 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> (알림톡)발신 프로필 그룹 관리 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> (친구톡)이미지 관리 Read(읽기), Delete(삭제) <br> (친구톡)대체 발송 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> 발송 설정 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> 웹훅 관리 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)<br> 통계 이벤트 키 설정 메뉴 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| KakaoTalk Bizmessage | STATISTICS ADMIN | KakaoTalk Bizmessage 서비스 통계 메뉴 Read(읽기), 조회 결과 다운로드 Create(생성)  |
+| Face Recognition | ADMIN | Face Recognition 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| OCR | ADMIN | OCR 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  | 
+| Text to Speech | ADMIN | Text to Speech 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Speech to Text | ADMIN | Speech to Text 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| AI EasyMaker | ADMIN | AI EasyMaker 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| ROLE | ADMIN | ROLE 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| API Gateway | ADMIN | API Gateway 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| RTCS | ADMIN | RTCS 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| ShortURL | ADMIN | ShortURL 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| File-Crafter | ADMIN | File-Crafter 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Cloud Scheduler | ADMIN | Cloud Scheduler 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| IAP | ADMIN | IAP 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Mobile Device Info | ADMIN | Mobile Device Info 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Cloud Search | ADMIN | Cloud Search 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Autocomplete | ADMIN | Autocomplete 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Corporation Search | ADMIN | Corporation Search 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Log & Crash Search | ADMIN | Log & Crash Search 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| DataFlow | ADMIN | DataFlow 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| DataQuery | ADMIN | DataQuery 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| EasyQueue | ADMIN | EasyQueue 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제), 메시지 송/수신  |
+| EasyQueue | CLIENT | EasyQueue 서비스 Read(읽기), 메시지 송/수신  |
+| EasyQueue | VIEWER | EasyQueue 서비스 Read(읽기) |
+| Pipeline | ADMIN | Pipeline 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Deploy | ADMIN | Deploy 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Deploy | VIEWER | Deploy 서비스 Read(읽기)|
+| Managed | ADMIN | Managed 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Service Monitoring | ADMIN | Service Monitoring 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Certificate Manager | ADMIN | Certificate Manager 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Certificate Manager | VIEWER | Certificate Manager 서비스 Read(읽기)|
+| Private CA | ADMIN | Private CA 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제)  |
+| Private CA | VIEWER | Private CA 서비스 Read(읽기) |
+| eTax| ADMIN | eTax 서비스 Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| eTax | VIEWER | eTax 서비스 Read(읽기) |
+
+
+#### 프로젝트 서비스 활성화 역할
+* 서비스 PERMISSION 역할은 개별 서비스를 활성화 또는 비활성화할 수 있습니다.
+
+| 역할 | 설명 |
+| --- | --- |
+| 서비스명 Permission | 서비스 Enable(활성화), Disable(비활성화)  |
+
+
+## 결제 관리
+
+NHN Cloud 서비스 이용 요금을 확인하고, 결제할 수 있습니다.
+**내 정보 보기 > 결제 관리** 메뉴에서 결제 수단을 등록한 NHN Cloud 계정의 청구서와 결제 예정 금액, 사용량 정보를 확인할 수 있습니다.
+
+결제 수단을 통해 해당 월에 결제되는 내역과 함께 아래의 기능을 제공합니다.
+
+- 즉시 결제: 매월 8일 자동 결제 전에 즉시 결제 기능을 통해 결제할 수 있습니다.
+- 매출 전표: 신용카드로 결제한 경우, 매출 전표를 조회할 수 있습니다.
+- 세금계산서: 계좌 이체로 결제한 경우, 세금계산서를 조회할 수 있습니다.
+
+결제 관리 청구서에 조회되는 내역은 아래와 같습니다.
+
+- 이용 금액: 서비스 사용량과 단가를 계산한 금액
+- 할인/할증 금액: 약정 할인, 관리자 할인/할증 등
+- 부가세: (이용 금액 - 할인 금액 + 할증 금액)의 10%
+- 연체료
+    - 한국 회원: 최종 결제 금액 미납 시, 해당 금액의 2%
+    - 일본 회원: 일본 소비자계약법에 의해 연체료가 발생하지 않습니다.
+- 최종 결제 금액: (이용 금액 - 할인 금액 + 할증 금액) + 부가세
+
+
+## 알림 관리
+
+알림 관리 기능은 NHN Cloud에서 발송하는 알림별로 고객이 직접 수신 받을 대상자와 알림 방법(Email, SMS)을 설정할 수 있는 기능입니다.
+
+
+1. **조직 > 알림 관리** 또는 **프로젝트 > 알림 관리**를 클릭합니다.
+    - 조직, 프로젝트 각각 수신 받는 알림을 관리할 수 있습니다.
+
+2. 알림 목록에서 수신 대상자를 변경할 알림을 찾아서 **수신 대상 수정 > 수정** 버튼을 클릭합니다.
+    - 좌측 목록에서 알림을 선택하거나, 우측 상단 검색 영역에서 알림명, 수신 대상 등을 검색하여 알림을 찾을 수 있습니다.
+    - 여러 알림의 수신 대상자를 한 번에 변경하려면 알림의 체크박스를 선택한 후, 알림 목록 상단의 **수신 대상 일괄 수정** 버튼을 클릭합니다.
+
+3. 멤버, 알림 수신 그룹, 역할별로  **알림 수신 대상 및 알림 방법(Email, SMS)**을 선택합니다.
+    - 해당 알림들은 웹훅을 지원하지 않습니다.
+    - 알림별로 지원하는 알림 방법이 다릅니다.
+    - 수신 대상을 알림 수신 그룹을 추가할 경우 해당 그룹에 설정된 알림 방법과 각 알림에서 지원하는 알림 방법이 일치해야 해당 방법으로 알림을 수신할 수 있습니다.
+
+4. **저장** 버튼을 클릭하여 설정 내용을 저장합니다.
+
+
+## 알림 수신 그룹 관리
+
+알림 수신 그룹 관리는 NHN Cloud에서 발송하는 알림에 대한 수신 그룹을 설정하는 기능입니다.
+
+Email, SMS 알림은 조직/프로젝트 역할 기반의 수신 대상 설정 및 멤버에 대한 수신 대상 설정을 통해 지원합니다.
+웹훅 알림은 기본 웹훅과 커스텀 웹훅을 제공합니다.
+해당하는 알림 수신 그룹은 **서비스**에서 알림 설정 시 사용할 수 있습니다.
+
+### 알림 수신 그룹 생성 방법
+
+1. **알림 수신 그룹**을 생성하려면 조직 또는 프로젝트 메뉴에 **알림 수신 그룹 관리** 버튼을 클릭합니다.
+2. **+ 알림 수신 그룹 추가** 버튼을 클릭합니다.
+3. **기본 정보** 란에 알림 수신 그룹명, 설명을 입력합니다.
+    - **알림 수신 그룹명**은 한글, 영문자, 숫자, 특수 문자로 최대 40자까지 입력할 수 있습니다.
+    - **설명**은 알림 수신 그룹명을 구분하기 위해 문자 제한 없이 최대 100자까지 입력할 수 있습니다.
+
+4. **수신 역할 설정**
+    - 조직 > 수신 역할 설정
+        * 조직/프로젝트 역할, 조직/프로젝트 역할 그룹, 서비스별 역할에 대한 Email, SMS 알림 설정을 지원합니다.
+    * 프로젝트 > 수신 역할 설정
+        * 프로젝트 역할, 프로젝트 역할 그룹, 서비스별 역할에 대해 Email, SMS 알림 설정을 지원합니다.
+
+5. **수신 대상 직접 설정**
+    - 알림 수신 그룹 추가에 수신 대상을 직접 설정할 수 있습니다.
+    - 멤버 별로 Email, SMS 알림 설정을 지원합니다.
+
+6. **웹훅 설정**
+    - 알림 발송 시 사용자가 원하는 웹훅으로 설정할 수 있습니다.
+    - 유형별로 기본 웹훅과 커스텀 웹훅을 제공합니다.  (5개까지 지원)
+
+### 웹훅 설정
+1. 콘솔 조직, 프로젝트 상단 탭에서 **[알림 수신 그룹 관리]** 탭을 선택합니다.
+2. 하단 **웹훅 설정** 메뉴의 **+웹훅 추가** 버튼을 선택합니다.
+3. **웹훅 추가** 팝업에서는 유형별로 기본 웹훅과 커스텀 웹훅을 제공합니다.
+    - 기본 웹훅
+        - 기본 웹훅은 지원하는 서비스 알림시에만 발송 할 수 있습니다.
+        - 웹훅 이름
+            - 설정할 기본 웹훅의 이름을 문자 제한 없이 최대 40자 이내로 입력할 수 있습니다.
+            - 같은 알림 수신 그룹 내 웹훅 이름은 중복될 수 없습니다.
+        - 수신 대상
+            - 웹훅을 수신할 URL을 입력할 수 있습니다.
+        - 비밀 키
+            - 비밀 키는 URI와 id, source, type, time을 SHA256 해시 알고리즘으로 암호화할 비밀 키입니다.
+                - 비밀 키가 설정되어 있는 경우에만 기본 웹훅 Header에 Authorization을 포함하여 전송합니다.
+                - 예: Authorization: HMAC-SHA256 Signature={암호화한 문자}"
+                    - Authorization Header를 확인하여 수신된 요청이 중간 공격자에 의해 변조되는 것을 방지할 수 있습니다.
+        - HTTP Method는 POST이고 Request Body는 아래의 형식으로 제공되며 body 필드는 서비스마다 달라집니다.
+
+```json
+   {
+   "id": "String",
+   "source": "String",
+   "specversion": "String",
+   "type": "String",
+   "body" : "Object"
+   }
 ```
-#!/bin/bash
-...
-```
 
-사용자 스크립트가 정상적으로 동작하기 위해서는 인스턴스 내부의 로그 파일을 확인해야 합니다. 스크립트에서 표준 출력/에러 장치로 출력한 로그는 `/var/log/cloud-init-output.log`에서 확인할 수 있습니다.
+- 커스텀 웹훅
+    - 커스텀 웹훅은 지원하는 서비스 알림시에만 발송 할 수 있습니다.
+    - 웹훅 이름
+        - 설정할 커스텀 웹훅의 이름을 문자 제한 없이 최대 40자 이내로 입력할 수 있습니다.
+        * 같은 알림 수신 그룹 내 웹훅 이름은 중복될 수 없습니다.
+    * 발송 대상
+        * 웹훅을 발송할 대상(커스텀 대시보드 또는 서비스)을 선택할 수 있습니다.
+        * 커스텀 웹훅을 제공하는 메뉴 또는 서비스만 선택할 수 있습니다.
+    * 수신 대상
+        * 웹훅을 수신할 URL과 HTTP Method를 입력할 수 있습니다.
 
-#### Windows
+      | 제공 대상 | 제공 범위 | 
+      | -- | -- | 
+      | HTTP Method | POST <br> PUT | 
+      | 전송 프로토콜 | HTTP<br> HTTPS | 
 
-Windows 이미지에서는 사용자 스크립트 형식으로 Batch 스크립트 형식, Powershell 스크립트 형식을 모두 지원합니다. 각 형식들은 첫 번째 줄에 명시하는 지시자에 의해 구분됩니다.
 
-* Batch 스크립트
-```
-rem cmd
-...
-```
+  - 요청 데이터
+      - 요청 데이터에는 발송 대상에서 제공하는 파라미터를 입력할 수 있습니다.
+          - Ctrl 키 + 스페이스 바를 눌러 해당 발송 대상이 지원하는 파라미터를 확인할 수 있습니다.
+          - 우측 하단 미리보기를 통해 제공되는 Value를 확인할 수 있습니다.
+              - \"alertId\": \"${alertId}\", <br> \"orgName\" : \"${orgName}\"
 
-* PowerShell 스크립트
-```
-#ps1_sysnative
-...
-```
+  - 헤더
+      - 수신 대상에 전달할 헤더를 입력할 수 있습니다.
+      - 수신 대상에 전달할 Content-type 헤더는 application/json을 지원하며 수정할 수 없습니다.
 
-만약 Batch 스크립트와 PowerShell 스크립트를 같이 사용하고 싶다면 아래와 같이 기술합니다.
+    | 헤더 항목 | 헤더 값 | 
+    | -- | -- | 
+    | Custom-Header1 | Value1 | 
+    | Custom-Header2 | Value2 | 
+    
+  - 이름, 발송 대상, 수신 대상을 입력한 뒤 **확인** 버튼을 클릭해 웹훅을 생성합니다.
 
-* EC2 format
-```
-<script>
-...
-</script>
-<powershell>
-...
-</powershell>
-```
+4. 추가한 웹훅은 웹훅 설정 목록에서 확인할 수 있습니다.
+    * **보기** 버튼을 클릭해 웹훅 상세 정보를 확인할 수 있습니다.
+    * 연필 아이콘을 클릭해 웹훅 정보를 수정할 수 있습니다.
+    * 휴지통 아이콘을 클릭해 웹훅을 삭제할 수 있습니다.
 
-사용자 스크립트의 로그는 `C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\cloudbase-init`에서 확인할 수 있습니다.
+5. 생성된 웹훅은 웹훅 발송을 제공하는 서비스에 **알림 수신 그룹**을 추가해 사용할 수 있습니다.
 
-사용자 스크립트와 관련하여 보다 자세한 설명은 [cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/format.html) 또는 [Cloudbase-init](https://cloudbase-init.readthedocs.io/en/latest/userdata.html) 가이드를 참고합니다.
 
-<a id="additional-instance-features"></a>
-## 인스턴스 추가 기능
+## 기술 지원
 
-<a id="change-instance-status"></a>
-### 인스턴스 상태 변경
+기술 지원은 조직 또는 프로젝트 멤버와 함께 문의를 등록하거나 관리할 수 있는 기능입니다.
+등록한 문의는 같은 조직 또는 프로젝트 내 모든 멤버가 확인할 수 있습니다. 필요한 경우 다른 멤버가 등록한 문의에 추가 질문을 남길 수 있습니다.
 
-인스턴스 중지, 종료, 삭제, 시작을 통해 인스턴스의 상태를 변경할 수 있습니다.
+개별 문의가 필요한 경우 NHN Cloud 고객 센터 [1:1 문의](https://www.nhncloud.com/kr/support/inquiry)를 이용하세요.
 
-인스턴스 중지, 종료, 삭제의 하이퍼바이저 리소스 및 요금 관련 정보는 아래 표를 참고합니다.
+### 문의 목록
 
-| 구분 | 인스턴스 중지 | 인스턴스 종료 | 인스턴스 삭제 |
-| --- | -- | --- | --- |
-| 하이퍼바이저 리소스 | 리소스 할당 상태 유지 | 리소스 반납 및 인스턴스 시작 시 재할당 | 리소스 제거 |
-| 인스턴스 요금 | 중지 요금 정책 적용 | 무료 | 무료 |
-| 연결된 다른 리소스 요금 | 과금됨| 과금됨 | 과금됨 |
+1. 콘솔에서 **조직 > 기술 지원** 또는 **프로젝트 > 기술 지원** 탭을 클릭합니다.
+    * 각 조직, 프로젝트에서 접수한 **문의 목록**을 확인할 수 있습니다.
 
-> [참고] GPU Instance는 종료할 수 없으며 중지 시에도 정상(100%) 요금이 발생합니다.
+### 문의 접수
 
-<a id="create-image"></a>
-### 이미지 생성
+1. **문의 목록** 화면에서 **문의 접수** 버튼을 클릭합니다.
+2. 접수할 문의의 유형을 선택하고 각 필드를 안내에 따라 작성합니다.
+    * 문의 유형별로 입력 필드가 달라질 수 있습니다.
+3. 하단에 **접수** 버튼을 클릭합니다.
+    * 유효성 검증(필수값 등) 실패 시 해당 입력 필드에 경고 메시지가 노출됩니다.
 
-인스턴스의 루트 블록 스토리지로부터 이미지를 생성합니다. 이미지 생성은 데이터 정합성을 보장하기 위해 인스턴스를 중지한 상태에서 진행하는 것을 권장합니다.
+### 추가 질문 접수
 
-인스턴스의 루트 블록 스토리지에 여유 공간이 전혀 없을 경우 이미지 생성은 가능하나, 이미지를 다른 인스턴스에서 사용하기 위한 초기화 작업은 불가하여 정상적으로 사용할 수 없습니다. 이미지를 생성하기 전에 인스턴스에서 최소 100KB의 여유 공간을 확보해야 합니다.
+1. **문의 목록** 화면의 기존 문의 목록에서 추가 질문을 접수할 문의 행을 클릭합니다.
+2. **상세 문의** 내역 화면 하단의 **추가 질문** 접수 폼을 입력합니다.
+3. **추가 질문** 접수 폼 내부의 **접수** 버튼을 클릭합니다.
+    * 추가 질문 내용과 전화번호는 필수값입니다.
+    * 회원 정보에 등록된 전화번호가 존재하는 경우 입력 필드에 기본값으로 채워집니다.
 
-생성된 이미지는 **Compute > Image**에 Private 이미지로 등록됩니다. 등록된 이미지를 이용하여 원본 인스턴스와 동일한 블록 스토리지를 가진 인스턴스를 생성할 수 있습니다.
+### 문의 답변 내용 확인
 
-> [주의]
-> 생성된 이미지의 크기는 루트 블록 스토리지의 실제 사용량보다 더 클 수 있습니다.
-
-<a id="associatedisassociate-floating-ip"></a>
-### 플로팅 IP 연결과 해제
-
-인스턴스의 상태에 관계없이 플로팅 IP를 연결하고 해제할 수 있습니다. 사용 가능한 플로팅 IP가 없거나 원하는 플로팅 IP가 없는 경우, **생성** 버튼을 클릭해 플로팅 IP를 생성하여 연결할 수 있습니다. 또는 **Network > VPC > Floating IP**에서 플로팅 IP를 생성하여 사용해도 됩니다.
-
-플로팅 IP에 대한 자세한 설명은 [VPC 개요](/Network/VPC/ko/overview/)를 참고합니다.
-
-<a id="modify-security-group"></a>
-### 보안 그룹 수정
-
-인스턴스의 상태에 관계없이 인스턴스의 보안 그룹을 수정할 수 있습니다. 수정된 보안 그룹은 바로 적용됩니다.
-
-보안 그룹에 대한 자세한 설명은 [보안 그룹](./console-guide/#security-group)과 [VPC 개요](/Network/VPC/ko/overview/)를 참고합니다.
-
-<a id="change-network-subnet"></a>
-### 네트워크 서브넷 변경
-
-인스턴스의 네트워크 서브넷은 인스턴스가 중지된 상태에서만 변경할 수 있습니다. 서브넷을 추가하면 자동으로 인스턴스에 해당 서브넷에 연결될 네트워크 인터페이스가 만들어집니다. 이 때, 한 번에 여러 서브넷을 추가하면 인스턴스에 새로 생성되는 네트워크 인터페이스 순서는 임의로 지정됩니다. 서브넷을 인스턴스에서 삭제하면 생성되었던 네트워크 인터페이스도 자동으로 삭제됩니다.
-
-<a id="modify-flavor"></a>
-### 인스턴스 타입 변경
-
-인스턴스 타입은 인스턴스를 중지한 후 변경할 수 있습니다. 인스턴스가 실행 중이면 **추가 기능**의 **인스턴스 중지**를 클릭하여 인스턴스를 중지합니다.
-
-현재 타입에 따라 변경할 수 있는 인스턴스 타입이 다릅니다.
-
-* m2, c2, r2, t2, x1 타입의 인스턴스는 m2, c2, r2, t2, x1 타입의 인스턴스 타입으로 변경할 수 있습니다.
-* m2, c2, r2, t2, x1 타입의 인스턴스는 u2 타입의 인스턴스 타입으로 변경할 수 없습니다.
-* u2 타입은 생성 이후에 타입을 변경할 수 없습니다. 같은 u2 타입의 인스턴스 타입으로도 변경할 수 없습니다.
-
-인스턴스 타입을 변경하면, 변경 작업과 변경 확인 작업이 진행됩니다. 모든 작업이 완료되면 VM 상태가 **Shutoff** 상태가 되며, **추가 기능**의 **Start instance**를 클릭하여 인스턴스를 시작할 수 있습니다.
-
-> [참고] 인스턴스의 루트 블록 스토리지 크기는 변경할 수 없습니다. 인스턴스의 블록 스토리지 공간이 부족하다면 블록 스토리지를 추가하여 사용합니다. 자세한 블록 스토리지 추가 방법은 [블록 스토리지 개요](/Storage/Block%20Storage/ko/overview/)를 참고합니다.
-
-인스턴스는 변경 시점을 기준으로 변경된 타입으로 과금됩니다.
-
-<a id="change-instance-os-details"></a>
-### 인스턴스 OS 정보 변경
-
-인스턴스의 상태에 관계없이 인스턴스 OS 정보를 변경할 수 있습니다. 
-
-**Compute > Instance** 서비스 페이지에서 OS 정보를 변경할 인스턴스를 클릭합니다. 해당 인스턴스 상세 정보 화면의 **기본 정보** 탭에서 **OS > 변경**을 클릭합니다.
-
-> [참고] OS 구분은 변경할 수 없습니다.
-
-<a id="change-instance-description"></a>
-### 인스턴스 설명 변경
-
-인스턴스의 상태에 관계없이 인스턴스 설명을 변경할 수 있습니다. 
-
-**Compute > Instance** 서비스 페이지에서 설명을 변경할 인스턴스를 클릭합니다. 해당 인스턴스 상세 정보 화면의 **기본 정보** 탭에서 **설명 > 변경**을 클릭합니다.
-
-<a id="change-instance-key-pair"></a>
-### 인스턴스 키페어 변경
-
-인스턴스 키페어는 인스턴스가 활성 상태인 경우에만 변경할 수 있습니다.
-
-**Compute > Instance** 서비스 페이지에서 키페어 정보를 변경할 인스턴스를 클릭합니다. 해당 인스턴스 상세 정보 화면의 **기본 정보** 탭에서 **키페어 > 변경**을 클릭합니다.
-
-인스턴스 기본 계정의 키페어를 선택한 키페어로 변경합니다. 인스턴스 기본 계정은 인스턴스 하단 상세 정보 화면의 **접속 정보** 탭에서 확인할 수 있습니다.
-
-> [주의] 인스턴스 키페어 변경 시 선택한 키페어를 제외한 인스턴스 내 모든 공개 키 내용이 삭제됩니다.
-
-> [참고] 기본 인프라 서비스 ADMIN 권한이 있는 프로젝트 멤버만 인스턴스 키페어를 변경할 수 있으며, Windows OS 인스턴스인 경우 변경할 수 없습니다.
-
-> [참고] 인스턴스 생성에 사용한 이미지 버전이 낮은 경우 키페어 변경 기능을 지원하지 않을 수 있습니다.
-
-<a id="manage-placement-policies"></a>
-### 배치 정책 관리
-
-배치 정책을 생성 및 삭제할 수 있으며 배치 정책에 할당된 인스턴스 목록을 보여줍니다.
-
-분산 배치를 위한 `anti-affinity` 배치 정책 유형만 제공합니다.
-
-배치 정책에 인스턴스가 할당된 경우에도 배치 정책 삭제가 가능하며 이 경우 인스턴스는 삭제되지 않습니다.
-
-<a id="key-pairs"></a>
-## 키페어
-
-<a id="import-key-pairs-windows"></a>
-### 키페어 가져오기(Windows 사용자)
-
-PuTTY SSH 클라이언트를 설치하면 함께 설치되는 puttygen 프로그램으로 키페어를 생성하고 NHN Cloud에 등록하여 사용할 수 있습니다.
-
-[PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) 또는 한글패치가 적용된 [iPuTTY](https://github.com/iPuTTY/iPuTTY/releases/tag/l0.70i)를 설치합니다.
-
-puttygen을 실행합니다.
-
-![이미지1](http://static.toastoven.net/prod_instance/putty-ssh-001.png)
-
-**매개변수**에서 **RSA**(또는 구 버전의 puttygen에서는 SSH-2 RSA)를 선택합니다. **작업**에 있는 **생성** 버튼을 클릭합니다. 키를 생성하기 위해서 빈 공간 안에서 마우스를 계속 움직입니다.
-
-키가 생성되면 아래 그림처럼 공개 키 파일 내용이 보입니다. 공개 키 내용 전체를 **키페어 가져오기**의 **공개 Key:** 입력란에 붙여 넣어서 키페어를 등록합니다.
-
-![이미지1](http://static.toastoven.net/prod_instance/putty-ssh-002.png)
-
-**작업**의 **개인 키 저장** 버튼을 클릭해 개인 키를 저장합니다. 키 암호어구를 빈 칸으로 두고 개인 키를 저장하면, **암호어구로 보호하지 않은 채 이 키를 저장하겠습니까?** 메시지가 나타납니다. 변환된 개인 키를 좀 더 안전하게 사용하려면 암호어구를 설정하여 저장합니다.
-
-> [주의]
-인스턴스에 자동으로 로그인하려면 암호어구를 사용하지 않아야 합니다. 암호어구를 사용하면 로그인할 때 개인 키에 대한 비밀번호를 직접 입력해야 합니다.
-
-등록한 키페어는 인스턴스를 생성할 때 사용할 수 있고, 인스턴스 접속 시에는 이 키페어의 개인 키로 접속하여야 합니다. 인스턴스 접속 방법은 [인스턴스 접속 방법](./overview/#how-to-access-instances)를 참고합니다.
-
-NHN Cloud에서 생성한 키페어와 마찬가지로 이렇게 만든 키페어의 개인 키도 외부 유출 시에 누구나 유출된 개인 키로 해당 인스턴스에 접근할 수 있게 되므로 신중하게 관리해야 합니다.
-
-<a id="import-key-pairs-mac-and-linux"></a>
-### 키페어 가져오기(Mac, Linux 사용자)
-
-Mac이나 Linux의 `ssh-keygen`으로 만든 키페어를 NHN Cloud에 등록하여 사용할 수 있습니다. 키페어는 다음 명령으로 생성합니다.
-
-	$ ssh-keygen -t rsa -f my_key.key
-
-키페어의 비밀번호는 설정해도 되지만 설정하지 않아도 사용하는 데에 문제는 없습니다. 보안 수준을 높이려면 비밀번호 설정을 추천합니다. 입력한 키페어의 이름에 `.pub` 확장자가 추가된 파일 안에 키페어 공개 키가 들어 있습니다.
-
-	$ cat my_key.key.pub
-	ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnnUAe36txQqk8J7VzbNuYKVQQ3gbNoClndHMX49OD+1Rw5xrDFLUKQqxbBDtlNMoA9tKBZNrQBpKr1kFEtvMIj1HPkH9ocb4MbuoVVjpkIhixbKMMJPDQ4JQJxaifsjR59YsZyDAp0aXZp+o+OB97P3S4AKPY2kQR0JdSr30+6Av6smf+3mZceAE4abzklfbyWT5slP1im/wfYEPO3QBEDl/0JbmTjKWPYI6QnbwnPRHS63SJ+Kd2QeYQYJCadv7X4mXnw81qEIWq/dx1SQkGDTNgR7lnN2ApFlU5EZcow69z6tiCr0hlyigwjGooMg3wTZvcSlYcVeTzZ755RArd ...
-
-이 내용 전체를 **키페어 가져오기**의 **공개 Key:** 입력란에 붙여 넣어서 키페어를 등록합니다.
-
-등록한 키페어는 인스턴스를 생성할 때 사용할 수 있고, 인스턴스 접속 시에는 이 키페어의 개인 키로 접속해야 합니다. 인스턴스 접속 방법은 [인스턴스 접속 방법](./overview/#how-to-access-instances)을 참고합니다.
-
-NHN Cloud에서 생성한 키페어와 마찬가지로 이렇게 만든 키페어의 개인 키도 외부 유출 시에 누구나 유출된 개인 키로 해당 인스턴스에 접근할 수 있게 되므로 신중하게 관리해야 합니다.
-
-<a id="appendix-1-change-language-packs-in-windows"></a>
-## 부록 1. Windows 언어팩 변경
-
-NHN Cloud Windows 이미지는 영문판을 기본으로 제공하고 있습니다. 다른 언어를 기본으로 사용하기 원하는 사용자는 다음의 방법에 따라 사용이 가능합니다.
-
-1. START -> Control Panel -> Clock, Language, and Region -> Add a language
-![이미지1](http://static.toastoven.net/prod_instance/windows1.png)
-
-2. 언어 기본 설정 변경 -> 언어 추가
-![이미지1](http://static.toastoven.net/prod_instance/windows2.png)
-
-3. 언어 추가 -> 사용하려는 언어 선택 -> 추가
-![이미지1](http://static.toastoven.net/prod_instance/windows3.png)
-
-4. 추가된 언어팩 확인
-![이미지1](http://static.toastoven.net/prod_instance/windows4.png)
-
-5. 추가된 언어팩 다운로드 및 설치
-![이미지1](http://static.toastoven.net/prod_instance/windows5.png)
-
-6. 업데이트 다운로드 및 설치
-![이미지1](http://static.toastoven.net/prod_instance/windows6.png)
-
-7. 설치된 언어팩 변경을 위해 선택언어 더블클릭 또는 옵션 선택
-![이미지1](http://static.toastoven.net/prod_instance/windows7.png)
-
-8. 언어 옵션에서 기본 언어로 설정 선택
-![이미지1](http://static.toastoven.net/prod_instance/windows8.png)
-
-9. 기본 언어로 설정후 적용되기 위해서 로그오프
-![이미지1](http://static.toastoven.net/prod_instance/windows9.png)
-
-10. 다시 로그인 하시면 사용자가 선택한 언어팩으로 변경 되어있는것을 볼수있습니다.
-![이미지1](http://static.toastoven.net/prod_instance/windows10.png)
-
-<a id="appendix-2-change-routing-in-windows"></a>
-## 부록 2. Windows 라우팅 변경
-
-NHN Cloud Windows 에서 라우팅을 변경하는 방법은 다음과 같은 방법 등이 있습니다.
-
-* START -> Run -> cmd
-
-Route 커맨드
-
-* 현재 설정 출력 : route print
-* 추가 : route add "목적지" mask "subnet" "gateway" metric "Metric 값" if "Interface 번호"
-* 변경 : route change "목적지" mask "subnet" "gateway" metric "Metric 값" if "Interface 번호"
-* 삭제 : route delete "목적지" mask "목적지 subnet" "gateway" metric "Metric 값" if "Interface 번호"
-* 옵션 : -p (영구 경로 지정)
-
-설명
-
-![이미지1](http://static.toastoven.net/prod_instance/windows_route1.png)
-
-* Metric 값 : 값이 낮을 수록 우선 순위 높음
-* Interface 번호 : route print에서 확인 가능 (빨간색 테두리)
-* 영구 경로 : -p 옵션을 사용하지 않는 경우 시스템 재시작 시에 설정한 경로가 초기화 되기 때문에 사용 (파란색 테두리)
-
-Case 1 - 특정 인터페이스만 외부 통신 설정
-
-* route change 커맨드를 통해 외부 통신을 원치 않는 인터페이스 경로의 metric을 수정하거나 고정 IP 설정에서 기본 게이트웨이 정보를 입력하지 않는 방법 등이 있습니다.
-* Metric 수정 방법
-    * 인터페이스의 metric 증가
-
-            $ route change 0.0.0.0 mask 0.0.0.0 172.16.5.1 metric 10 if 14 -p
-
-![이미지1](http://static.toastoven.net/prod_instance/windows_route2.png)
-
-* 고정 IP 설정 방법
-    1. ipconfig /all을 통해 IP정보 확인
-![이미지1](http://static.toastoven.net/prod_instance/windows_route3.png)
-    2. 확인된 IP정보를 이용하여 IP설정 창에서 기본 게이트웨이를 제외하고 입력
-![이미지1](http://static.toastoven.net/prod_instance/windows_route4.png)
-    3. route print를 통해 확인
-![이미지1](http://static.toastoven.net/prod_instance/windows_route5.png)
-
-Case 2 - 특정 대역에 대한 경로 설정
-
-* route add 커맨드를 통해 특정 대역에 대한 경로를 설정합니다.
-
-        $ route add 172.16.0.0 mask 255.255.0.0 172.16.5.1 metric 1 if 14 -p
-
-![이미지1](http://static.toastoven.net/prod_instance/windows_route6.png)
-
-Case 3 - 특정 경로 제거
-
-* route delete를 통해 지정된 경로를 제거합니다.
-
-        $ route delete 172.16.0.0 mask 255.255.0.0 172.16.5.1
-
-![이미지1](http://static.toastoven.net/prod_instance/windows_route7.png)
-
-<a id="appendix-3-change-system-locale"></a>
-## 부록 3. 시스템 로캘 변경
-
-NHN Cloud Windows에서 시스템 로캘을 변경하는 방법은 다음과 같습니다.
-
-1. **Windows 키 > 제어판 > 시계 및 국가**를 선택합니다.
-![이미지1](http://static.toastoven.net/prod_instance/win_locale1.png)
-
-2. **국가 또는 지역**을 선택합니다.
-![이미지1](http://static.toastoven.net/prod_instance/win_locale2.png)
-
-3. **관리자 옵션** 탭에서 **시스템 로캘 변경**을 클릭합니다.
-![이미지1](http://static.toastoven.net/prod_instance/win_locale3.png)
-
-4. 변경할 시스템 로캘을 선택합니다.
-![이미지1](http://static.toastoven.net/prod_instance/win_locale4.png)
-
-5. 적용하려면 시스템을 재시작합니다.
-![이미지1](http://static.toastoven.net/prod_instance/win_locale5.png)
-
-<a id="appendix-4-restarting-instances-for-hypervisor-maintenance"></a>
-## 부록 4. 하이퍼바이저 점검을 위한 인스턴스 재시작 가이드
-
-NHN Cloud는 주기적으로 하이퍼바이저 소프트웨어를 업데이트하여 기본 인프라 서비스의 보안과 안정성을 향상시키고 있습니다.
-점검 대상 하이퍼바이저에서 구동 중인 인스턴스는 재시작을 통해 점검이 완료된 하이퍼바이저로 이동해야 합니다.
-
-인스턴스를 재시작하려면 콘솔을 통해 인스턴스 이름 옆에 생성된 **! 재시작** 버튼을 사용해야 합니다.
-`콘솔에 있는 인스턴스 재부팅 또는 운영체제의 재시작 기능으로는 인스턴스가 다른 하이퍼바이저로 이동하지 않습니다.`
-아래 가이드에 따라 콘솔에 있는 재시작 기능을 이용하시기 바랍니다.
-
-점검 대상으로 지정된 인스턴스가 있는 프로젝트로 이동합니다.
-
-**1. 점검 대상 인스턴스를 확인합니다.**
-
-인스턴스 이름 앞에 **! 재시작** 버튼이 있는 인스턴스가 점검 대상 인스턴스입니다.
-**! 재시작** 버튼 위에 마우스 커서를 올리면 자세한 점검 일정을 확인할 수 있습니다.
-![인스턴스 점검 이미지1](http://static.toastoven.net/prod_instance/instance_p_migration_ko_1.png)    
-
-**2. 점검 대상 인스턴스에서 구동 중인 응용 프로그램을 비활성화하거나 종료합니다.**
-
-점검 대상 인스턴스에서 구동 중인 응용 프로그램을 비활성화하거나 종료하여 서비스에 영향을 주지 않도록 조치해야 합니다. 
-서비스에 영향을 줄 수 밖에 없을 때는 NHN Cloud 고객 센터로 연락해 주시면 적합한 조치를 안내해 드리겠습니다.
-
-**3. 점검 대상 인스턴스 이름 옆에 생성된 [! 재시작] 버튼을 클릭합니다.**
-
-![인스턴스 점검 이미지2](http://static.toastoven.net/prod_instance/instance_p_migration_ko_2.png)
-
-**4. 인스턴스 재시작 여부를 묻는 창이 나타나면 [확인] 버튼을 클릭합니다.**
-
-![인스턴스 점검 이미지3](http://static.toastoven.net/prod_instance/instance_p_migration_ko_3.png)
-
-**5. 인스턴스 상태 표시등이 초록색으로 변하고, [! 재시작] 버튼이 사라질 때까지 대기합니다.**
-
-인스턴스 상태 표시등이 변하지 않거나 **! 재시작** 버튼이 비활성화되지 않는다면 '새로 고침'을 해보시기 바랍니다.
-
-인스턴스가 재부팅되는 동안에는 해당 인스턴스에 아무런 조작을 할 수 없습니다.
-인스턴스 재부팅이 정상적으로 완료되지 않으면 자동으로 관리자에게 보고되며, NHN Cloud에서 별도로 연락을 드립니다.
+1. **문의 목록** 화면의 문의 목록에서 답변 내용을 확인할 문의 행을 클릭합니다.
+2. **상세 문의** 내역 화면에서 문의 내용, 추가 질문 내용, 답변 내용을 확인할 수 있습니다.
