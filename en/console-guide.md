@@ -1,505 +1,356 @@
-<a id="compute-instance-console-guide"></a>
-## Compute > Instance > Console Guide
+## Network > VPC > Console Guide
 
-<a id="create-instances"></a>
-## Create Instances
+This document describes what you need to know when working with VPCs in the console.
 
-You can create instances either by using the settings below or by using instance templates. To create instances using instance templates, select **Use instance template** from the Create Instance page. To learn how to create instance templates, see [Instance Template Console Guide](/Compute/Instance%20Template/en/console-guide/).
+## Video Guide
+<iframe width="560" height="315" src="https://www.youtube.com/embed/faX5L2XA_78" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<a id="os-settings"></a>
-### OS Settings
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qLjzBebDaqE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Determine how the root block storage is created that will be used when an instance is created.
+## VPC
 
-- Select either **Create New and Set up** or **Use Existing Resource**.
-- If you select **Create New and Set up**, create root block storage using an image.
-- If you select **Use Existing Resource**, use a previously created block storage or snapshot.
+Since VPCs can have multiple subnets, you need to set up a sufficiently large network when dividing and using subnets. VPC networks can be described using [CIDR Notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). All VPCs must be within the following 3 address ranges that can configure [private networks](https://en.wikipedia.org/wiki/Private_network), and link-local addresses cannot be used. Additionally, you must specify a network area larger than at least 24bit-256 addresses.
 
-<a id="image"></a>
-### Image
+### Private Network
 
-Select the image that contains the operating system you need. You can choose between public images provided by NHN Cloud, images you've previously created, or shared images.
+RFC1918 | IP Address Range | Number of Available Addresses
+-------- | ---------- | -----------------
+24bit block | 10.0.0.0/8 | 16,777,216
+20bit block | 172.16.0.0/12 | 1,047,576
+16bit block | 192.168.0.0/16 | 65,536
 
-The available instance flavors vary depending on the image you choose, so we recommended you choose an image first when creating an instance.
+### Link-local addresses
 
-| OS                         | Block Storage     | Memory   |
-| -------------------------------- | ---------- | -------- |
-| Linux<br>Ubuntu, Debian, Rocky | 20GB or more  | 1GB or more |
-| Windows                           | 50GB or more  | 2GB or more |
+65,536 IP addresses included in 169.254.0.0/16 cannot be used.
 
-<a id="root-block-storage"></a>
-### Root Block Storage
+### Examples
 
-Set up root block storage according to the **OS settings**.
+Example | Availability
+-------- | ---------- 
+10.0.0.0/8 | Available
+10.0.0.0/16 | Available
+10.0.0.0/24 | Available
+10.0.0.0/28 | Unavailable. Range is too small.
+172.16.0.0/16 | Available
+172.16.0.0/8 | Unavailable. Outside the available range.
+192.168.0.0/16 | Available. Designated as the default usage range.
+192.168.0.0/24 | Available
+192.253.0.0/24 | Unavailable. Outside the available range. 
 
-- If you select **Create New and Set up**, create the root block store by specifying the **block storage type** and **block storage size**.
-- If you select **Use Existing Resource**, specify the **original resource** to use as root block storage.
+<br>
 
-#### Original Resource
 
-You can select either a previously created **block storage** or **snapshot**.
+When you first use Compute and Network services, the following items are automatically configured:
 
-- When you select **block storage**, use the previously created block storage as the root block storage.
-- When you select **snapshot**, the root block storage is created using a previously created snapshot.
+Item | Name | Summary
+-------- | ---------- | --------------
+VPC | Default Network | One VPC with a range of 192.168.0.0/16 is created.
+Subnet | Default Network | One subnet with a range of 192.168.0.0/24 is created.
+Routing Table | vpc-[id] | One routing table with a name containing part of the VPC ID is created.
+Internet Gateway | ig-[id] | One internet gateway with a name containing part of the routing table ID is created.
+Security Group | default | One security group with the name 'default' is created.
 
-#### Block Storage Size
+When adding a VPC (not initial configuration), the following items are configured:
 
-Specify the root block storage size of an instance.
+Item | Name | Summary
+-------- | ---------- | --------------
+VPC | Specified name | One VPC with the specified range is created.
+Subnet | - | Not created
+Routing Table | vpc-[id] | One routing table with a name containing part of the VPC ID is created.
+Internet Gateway | - | Not created, so must be created and connected separately.
+Security Group | - | Not additionally created.
 
-- The block storage size must be at least the minimum size required by the image.
+The quotas for VPCs and each item are as follows:
 
-The root block storage size varies depending on instance flavor.
+Item | Maximum Value
+-------- | ---------- 
+VPC | 3
+Subnet | 10 per VPC 
+Internet Gateway | 3 
+Floating IP | No limit
+Routing Table | 10 per VPC 
+Route | 10 per routing table
+Peering | No limit
 
-| Flavors               | Supported Block Storage Size         |
-| -------------------| -------------------------- |
-| u2 flavors             | 20 ~ 100 GB (varies by flavor) |
-| t2, m2, c2, r2, and x1 flavors | 20 ~ 2000 GB               |
 
-> [Note]
-> Because you are charged by block storage size, it is inefficient to make the default block storage size large without consideration. We recommend that you add additional block storage as needed.
-> If you select **block storage** for **Use Existing Resource** in the **OS settings**, you can't change the block storage size.
-> If you select **snapshot** for **Use Existing Resource** in the **OS settings**, block storage size must be set equal to or larger than the original block storage size.
-
-#### Block Storage Type
-
-Determines the default block storage type of an instance.
-
-- Choose either **HDD** or **SSD**. The choice of block storage type affects pricing and performance.
-- You cannot change the block storage type once the instance is created.
-
-> [Note]
-> If you select **Use Existing Resource** in the **OS settings**, you can't change the block storage type.
-
-<a id="availability-zone"></a>
-### Availability Zone
-
-If an availability zone is not specified, a random zone is selected. An instance can use a block storage only if they both exist in the same availability zone. If the block storage you wish to use exists in a particular availability zone, then select that zone.
-
-> [Note]
-> Resources in a VPC can be used in any availability zone.
-> If you select **Use Existing Resource** in the **OS settings**, you can't change the availability zone.
-
-For more details on availability zones, see [Availability Zone in Instance Overview](./overview/#availability-zone).
-
-<a id="flavor"></a>
-### Flavor
-
-You can select various flavors depending on virtual hardware performance specifications. However, the choice of some flavors may be limited depending on the virtual hardware performance that your image requires. For more details, see [Instance Overview](./overview).
-
-> [Note] 
-> 1 vCPU refers to one socket composed of one thread and one core, the number of threads and the number of cores per socket are constant, one each.
-
-Instance flavors can be changed in the NHN Cloud console even after instance creation, from higher to lower specs and vice versa. However, note that some flavors cannot be changed. See [Modify flavor](./console-guide/#modify-flavor) for details.
-
-> [Caution] An instance's root block storagecannot be changed by changing instance flavors.
-
-<a id="number-of-instances"></a>
-### Number of Instances
-
-You can specify the number of instances you want to create when creating multiple instances with the same image, availability zone, flavor, block storage size, key pair, and network settings. The instance names will be the name you specified, with numbers such as `-1` and `-2` appended to the end. For example, creating two instances named `my-instance` will result in `my-instance-1` and `my-instance-2`. The maximum number of instances you can create at once is 10.
-
-When you create multiple instances without specifying an availability zone, each instance will be created in a randomly selected availability zone. For example, if two instances are created without specifying an availability zone, they may be created in the same zone or they may be created in different zones. If all instances need to be created in the same availability zone, select a particular zone.
 
 > [Note]
-> If you select **block storage** for **Use Existing Resource** in the **OS settings** or **Use Existing Network Interface** in the **network settings**, the number of instances is limited to `1`.
+> To delete a VPC, it is only possible when all subnets can be deleted, and in such cases, subnets, routing tables, and internet gateways are deleted together.
 
-<a id="key-pair"></a>
-### Key Pair
+* VPCs are completely isolated from other VPCs and are safe from traffic.
 
-Use an existing key pair or create a new key pair. To register an existing key pair, see [Import Key Pair (Windows)](./console-guide/#import-key-pairs-windows) for Windows users, and [Import Key Pair (Mac and Linux)](./console-guide/#import-key-pairs-mac-and-linux) for Mac and Linux users.
+* Since VPCs are private networks, direct access from the internet is not possible.
+
+* All elements within a VPC cannot use VLANs.
+
+* Local communication is not provided for traffic that crosses regions.
+
+* Without an internet gateway, all instances within a VPC are not connected to the internet.
+
+* Excessively transmitted "Broadcast, Multicast, Unknown Unicast" traffic may be blocked without notice.
+
+
+## Subnet
+
+VPCs can be divided into subnets to configure multiple small networks. However, subnets must be included within the VPC address range and have equal or smaller address lengths. For example, with 192.168.0.0/16, you can use a total of 65,536 IP addresses from 192.168.0.0 to 192.168.255.255. Also, the smallest subnet is 28 bits, and you cannot configure it smaller than this. Subnets use CIDR notation like VPCs.
+
+When a subnet is created, the gateway IP address is automatically assigned and cannot be changed. It is also automatically registered in the routing table included in the VPC. 
 
 > [Note]
-> Key Pair is a resource assigned to the user account, so it's not deleted when you delete a project.
+> Subnet deletion is only possible for empty subnets that do not contain instances or load balancers. Also, there must be no routes to that subnet in the routing table to which the subnet is connected.
 
-<a id="network"></a>
-### Network
+* When an instance is created, it is allocated one IP address from the specified subnet (called Fixed IP).
 
-Select a subnet defined in your VPC to connect to an instance. For each selected subnet, a network interface is created in the instance to connect to that subnet. You can change the order of selected subnets to change network interfaces, in which case the first network interface (`eth0`) will be set as the default gateway.
+* When an instance boots up, the IP address is applied to the instance through DHCP.
 
-For more details on creating and managing networks, refer to [VPC Overview](/Network/VPC/en/overview/).
+* The address range of a subnet cannot be modified.
 
-<a id="floating-ip"></a>
-### Floating IP
+* Within the same VPC, different subnets cannot be created with overlapping or conflicting ranges.
 
-Select whether you will use a floating IP after instance creation. If you enable this option, a new floating IP is created and connected to the first network interface. Note that the first network interface must be connected to a subnet where an internet gateway is configured.
+* In different VPCs, subnet ranges can overlap or conflict.
 
-Floating IP can be managed from Instance > Management, or Instance > Floating IP. For more details on floating IP, see [VPC Console Guide](/Network/VPC/en/console-guide/).
+* If MAC addresses other than those assigned to instances are used, they may be blocked on the network. Therefore, VPN services may not work when running on instances.
 
-<a id="security-group"></a>
-### Security Group
+* When connecting multiple subnets to an instance, appropriate routing configuration is required in the OS within the instance.
 
-Select security groups that the instance will be included in. One instance can be included in multiple security groups, in which case,
+* Two subnets within the same VPC are not completely isolated. Use security groups to protect instances.
 
-- The instance can communicate over the network with all other instances included in each security group. When you are dealing with an instance with sensitive data that is not meant to be accessible by other instances, you must carefully select security groups.
-- The rules of each security group are aggregated and applied to the instance's external network communication.
+* Subnets support local communication across different availability zones. Local communication is not charged.
 
-For more details on security groups, see [VPC Console Guide](/Network/VPC/en/console-guide/).
 
-<a id="additional-block-storage"></a>
-### Additional Block Storage
+## Internet Gateway
 
-Select whether you will attach an additional block storage after instance creation. If you enable this option, a new block storage separate from the root block storage is created and attached to the instance. As with the root block storage, you can specify the name, storage type, and size of the additional block storage you create.
+Internet gateways can be connected to routing tables. VPCs created as private networks cannot connect externally, but internet gateways can be used to access the internet. To connect to the internet, each instance must set the "default gateway" to the gateway address of the subnet, which NHN Cloud handles automatically. When creating an internet gateway, you need to select an external network, and NHN Cloud currently operates only one "public_network".
 
-By using the root block storage only for the OS and storing your frequently used applications and data on the additional block storage, you can easily migrate or copy your applications and data using the block storage attach/detach and snapshot features. In addition, when an instance failure occurs, you can easily recover your services by simply detaching the additional block storage and attaching it to another instance.
+* Internet gateway addresses are automatically assigned when instances are created or when VPCs require internet connectivity, and cannot be arbitrarily changed.
 
-Block storage can also be managed from Instance > Block Storage. For more details on block storage, see [Block Storage Guide](/Storage/Block%20Storage/en/overview/).
+* Instances cannot be accessed through internet gateway addresses.
 
-<a id="placement-policy"></a>
-### Placement Policy
+* All traffic coming into internet gateway addresses is blocked.
 
-You can use placement policies to place instances on different hypervisors. When you set a placement policy at instance creation time, instances assigned to the same placement policy are created on different hypervisors.
- 
-> [Caution]
-> Instance creation may fail in situations where distributed deployment is not possible.
+* When instances connected to the internet generate traffic toward the internet, charges apply based on usage.
 
-<a id="user-script"></a>
-### User Script
+* Local communication between instances is not charged.
 
-You can specify a script to be executed after instance creation. The user script is executed following the instance's initial boot and after the initialization process including network configuration has completed. User scripts in NHN Cloud are executed by automated tools such as cloud-init (Linux) and Cloudbase-init (Windows), which are embedded in the official images.
+### Internet Gateway Restart Guide for Server Maintenance
 
-> [Caution]
-> User scripts are executed with root (Linux)/Administrator (Windows) privileges.
+NHN Cloud periodically updates internet gateway server software to improve the security and stability of basic infrastructure services.
+For internet gateway server maintenance, internet gateways running on maintenance target servers must be restarted to move to internet gateway servers where maintenance has been completed.
 
-#### Linux
-The first line of a user script must begin with `#!`.
+Internet gateways that require restart have a **! Restart** button displayed next to their name, which can be used to restart them.
+
+Go to the project with the internet gateway designated for maintenance and perform the restart with the following procedure:
+
+1. Check the internet gateway targeted for maintenance.
+   The internet gateway with the **! Restart** button next to its name is the maintenance target internet gateway.
+   ![Internet Gateway Maintenance Image 001](images/ig_planned_migration_guide-ko-001.png)
+   You can check detailed maintenance schedule by hovering the mouse cursor over the **! Restart** button. 
+   ![Internet Gateway Maintenance Image 002](images/ig_planned_migration_guide-ko-002.png)
+2. Select the maintenance target internet gateway and click the **! Restart** button next to its name.
+   Until the restart is completed, internet connectivity for instances using the maintenance target internet gateway will be blocked, so please perform this during times that do not affect your service. 
+   However, instances with connected floating IPs are not affected by internet gateway restarts.
+3. When a window appears asking whether to restart the internet gateway, click the **Confirm** button.
+   ![Internet Gateway Maintenance Image 003](images/ig_planned_migration_guide-ko-003.png)
+4. Wait until the status indicator turns green and the **! Restart** button disappears.
+   If the internet gateway status indicator does not change or the **! Restart** button does not disappear, please try refreshing.
+   ![Internet Gateway Maintenance Image 004](images/ig_planned_migration_guide-ko-004.png)
+
+While the internet gateway is restarting, you cannot operate that internet gateway.
+If the internet gateway does not restart normally, it is automatically reported to administrators, and NHN Cloud will contact you separately.
+
+## Floating IP
+
+When an instance is created, it is allocated one IP address from the specified subnet. Since this IP address belongs to the subnet, it is naturally included in the VPC. This is called Fixed IP. Since this address is a private network address, it cannot be accessed from the internet. Therefore, if you want to access an instance directly from outside, you need to use an IP address that can be accessed from outside. Floating IP is a feature required to directly access instances from the internet. When using floating IP, that address and the instance are connected 1:1, making direct access from the internet possible. For details, see [Overview]. To create a floating IP, you need to select an external network, and NHN Cloud currently operates only one "Public Network". 
+
+> [Note] To connect a floating IP to an instance, the subnet containing the instance must be connected to a routing table, <br>
+> and the "connect" operation can only be performed when that routing table is connected to the internet through an internet gateway.
+
+* Floating IPs are charged upon creation. They are continuously charged until deletion (regardless of instance connection).
+
+* Connecting a floating IP does not change the Fixed IP to the floating IP.
+
+* Charges apply when traffic occurs toward the internet.
+
+* When two instances within the same VPC communicate using floating IPs, charges apply based on usage.
+
+> [Note] When two instances within the same VPC use Fixed IPs for local communication, no charges apply.
+
+### Connecting Floating IP to Instances with Multiple Network Interfaces
+
+Instances with multiple network interfaces can connect floating IPs to each network interface. However, to access instances through floating IPs connected to network interfaces other than the first one, Routing Rule configuration is required within the instance.
+
+Instances created with **NHN Cloud public Linux image distribution version `2018.12.27` or later** automatically configure Routing Rules during boot, making access possible through all floating IPs connected to each network interface. 
+
+After connecting to the instance, you can check whether Routing Rules are configured as follows:
 ```
-#!/bin/bash
+$ ip rule
+0:      from all lookup local
+100:    from { eth0 IP address } lookup 1
+200:    from { eth1 IP address } lookup 2
+300:    from { eth2 IP address } lookup 3
 ...
+32766:  from all lookup main
+32767:  from all lookup default
+```
+When running the ip rule command as above, if Routing Rules are configured for each network interface, access to the instance is possible through all floating IPs.
+
+For instances created with other images, you can configure Routing Rules within the instance as follows to enable access through all floating IPs connected to the instance.
+
+After accessing the instance through the floating IP connected to the first network interface (eth0), execute the following commands for the remaining network interfaces you want to connect floating IPs to for access:
+```
+ip rule add from {network interface IP address}/32 table {table number} priority {priority}
+ip route add default via {network interface default gateway address} table {table number}
+ip route add {network interface subnet CIDR} dev {network interface name} table {table number}
 ```
 
-For a user script to run successfully, log files in the instance must be checked. You can check output logs printed by standard output/error from the script in `/var/log/cloud-init-output.log`.
-
-#### Windows
-
-Windows images support both Batch and PowerShell formats for user scripts. The format is determined by an indicator specified in the first line.
-
-* Batch Script
+For example, when the network interface information of an instance is as follows:
 ```
-rem cmd
-...
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1454 qdisc pfifo_fast state UP qlen 1000
+    link/ether fa:16:3e:8d:71:d6 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.100.132/24 brd 192.168.100.255 scope global dynamic eth0
+       valid_lft 86379sec preferred_lft 86379sec
+    inet6 fe80::f816:3eff:fe8d:71d6/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1454 qdisc pfifo_fast state UP qlen 1000
+    link/ether fa:16:3e:06:96:2f brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.37/24 brd 172.16.0.255 scope global dynamic eth1
+       valid_lft 86381sec preferred_lft 86381sec
+    inet6 fe80::f816:3eff:fe06:962f/64 scope link
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1454 qdisc pfifo_fast state UP qlen 1000
+    link/ether fa:16:3e:06:ac:10 brd ff:ff:ff:ff:ff:ff
+    inet 10.254.0.90/24 brd 10.254.0.255 scope global dynamic eth2
+       valid_lft 86386sec preferred_lft 86386sec
+    inet6 fe80::f816:3eff:fe06:ac10/64 scope link
+       valid_lft forever preferred_lft forever
+```
+To access via floating IP for `eth1` and `eth2`, configure Routing Rules with the following commands:
+
+```
+# Configure Routing Rules for eth1 floating IP access
+ip rule add from 172.16.0.37/32 table 2 priority 200
+ip route add default via 172.16.0.1 table 2
+ip route add 172.16.0.0/24 dev eth1 table 2
+
+# Configure Routing Rules for eth2 floating IP access
+ip rule add from 10.254.0.90/32 table 3 priority 300
+ip route add default via 10.254.0.1 table 3
+ip route add 10.254.0.0/24 dev eth2 table 3
+```
+After executing the commands, you can verify the configured Routing Rules as follows:
+
+```
+$ ip rule													
+0:	from all lookup local
+200:	from 172.16.0.37 lookup 2 	
+300:	from 10.254.0.90 lookup 3 	
+32766:	from all lookup main
+32767:	from all lookup default
+
+$ ip route show table 2					
+default via 172.16.0.1 dev eth1
+172.16.0.0/24 dev eth1  scope link
+
+$ ip route show table 3
+default via 10.254.0.1 dev eth2
+10.254.0.0/24 dev eth2  scope link
 ```
 
-* PowerShell Script
-```
-#ps1_sysnative
-...
-```
+Since the above Routing Rule configuration is reset when the instance reboots, it is recommended to configure Routing Rules to be automatically set when the instance reboots.
 
-To use both Batch and PowerShell in your script, use the following format.
+## Security Group
 
-* EC2 format
-```
-<script>
-...
-</script>
-<powershell>
-...
-</powershell>
-```
+Security groups are used to protect instances from other traffic. They use a 'positive security model' that allows specified traffic and blocks all other traffic. 
 
-Logs from user scripts can be found in `C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\cloudbase-init`.
+When you first start the service, one default security group is created and blocks all incoming traffic. Therefore, services like 'ping' and 'ssh' cannot be used, and necessary rules must be configured for use. This applies equally to both external access using floating IPs and internal access using private IPs. 
 
-For more details regarding user scripts, see the [cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/format.html) or [Cloudbase-init](https://cloudbase-init.readthedocs.io/en/latest/userdata.html) guides.
+Multiple security groups can be configured for instances. If you create additional security groups, add multiple rules, and configure them on instances, all rules from all configured security groups are applied to the instances.
 
-<a id="additional-instance-features"></a>
-## Additional Instance Features
+For example, if there is a security group called 'CONN' with rules 'Inbound TCP PORT 22' and 'Inbound TCP PORT 23', and a security group called 'WEB' with rules 'Inbound TCP PORT 80' and 'Inbound TCP PORT 8080', configuring both 'CONN' and 'WEB' security groups on one instance will apply all four rules together, allowing use of all corresponding services.
 
-<a id="change-instance-status"></a>
-### Change Instance Status
 
-An instance’s status can be changed by stopping, terminating, deleting, and starting it.
+| Item        | Description                                                         |
+| ----------- | ------------------------------------------------------------ |
+| Direction        | Inbound means traffic flowing into the instance. Outbound means traffic going out from the instance. |
+| Ether Type  | Means the version of EtherType IP. You can specify IPv4 or IPv6. |
+| IP Protocol | You can specify a specific protocol or all protocols. Other Protocol 0 has the same meaning as 'any' and allows all IP protocols.       |
+| Port Range   | For L4 protocols, you can specify a port range.         |
+| Remote        | You can specify security groups or IP address ranges. If the rule direction is 'outbound', the destination is remote; if 'inbound', the source is remote. <br>Depending on the rule direction, traffic sources and destinations are compared. If you specify a security group, it compares whether it's an IP of instances belonging to the specified security group, <br>and if you select CIDR to specify IP addresses or ranges, it compares whether it matches the configured IP addresses or ranges. |
+| Description        | You can add a description for security group rules.         |
 
-For more details on hypervisor resources and fees for stopping, terminating, and deleting instances, see the table below.
+Security groups operate 'statefully', so sessions once connected by rules are allowed even without opposite direction rules. 
 
-| Classification | Stop instance | Terminate Instance | Delete Instance |
-| --- | -- | --- | --- |
-| Hypervisor resource | Resource remain allocated  | Resource returned and reallocated when an instance is started | Resource removed |
-| Pricing for instance | Price for stopping applied | Free | Free |
-| Pricing for other connected resources | Charged| Charged | Charged |
+For example, if the first packet of TCP 80 heading to an instance passes according to the 'Inbound TCP PORT 80' rule, packets sent from the instance with TCP port 80 as the source are not blocked. 
 
-> [Note] GPU Instances cannot be terminated and will incur normal (100%) rates when stopped.
+However, if no packets matching the rule come in for a certain period and the session expires, packets in the opposite direction are also blocked. 
 
-<a id="create-image"></a>
-### Create Image
+The default security group has rules configured for all traffic going out from instances. If you do not delete this rule, all sessions initiated from instances are allowed.
 
-Create an image from an instance's root block storage. It is recommended to stop instances before creating an image in order to ensure data integrity.
+* It is more efficient to specify ranges rather than adding rules one by one.
 
-While it is possible to create an image from an instance that has no available free space in its root block storage, those images are unusable by other instances because they cannot be properly initialized. Before creating an image, ensure that your instance has at least 100KB of free space.
+* Performance degradation may occur as rules increase.
 
-Created images are registered as private images in **Compute > Image**. You can use the registered image to create an instance with a block storage identical to that of the original instance.
+* Traffic with incorrect session states may be blocked.
 
-> [Caution]
-> The size of the created image may be larger than the actual usage of the root block storage.
+* Asymmetric traffic with different inbound and outbound paths is blocked.
 
-<a id="associatedisassociate-floating-ip"></a>
-### Associate/Disassociate Floating IP
+* Rules not in the list can be defined and used. [Well-known port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
 
-Floating IP can be associated with or disassociated from an instance, regardless of the instance's status. If you have no available floating IP or if the floating IP you want is not available, you can create one by clicking **Create**. Alternatively, floating IP can also be created from **Network > VPC > Floating IP**.
+## Security Group Logging
+Security group logging is used to check packets allowed or blocked by security groups.
+When security group logging is configured, it applies to all instances using security groups in the current project.
+When the logging creation action is set to DROP, all packets blocked by security groups are logged. When the logging creation action is set to ACCEPT, packets allowed by security groups are logged. At this time, if bidirectional communication occurs, only the first packet of the session among allowed packets is logged, and if bidirectional communication does not occur, all allowed packets are logged. When the logging creation action is set to ALL, both of the above conditions apply.
+When the storage type is set to Object Storage, the storage location is specified as the Object Store value by clicking the **API Endpoint Settings** button on the Object Storage service page. It is also possible to specify Object Store of Object Storage service in other projects. The container to be specified as the storage path must be created in advance, but its subfolders do not need to be created in advance. For example, if you specify the storage path as /mycon/sglog/, the container called mycon must be created in advance, but the sglog folder does not need to exist.
+Packet information logged by security groups is stored as JSON format files in the user-specified Object Storage every 10 minutes. However, the first logging file after configuring the logging feature can be created within 10 minutes. If no packets are logged for 10 minutes, no file is created. Logging files stored in Object Storage are stored under 'storage path/project ID/instance ID/'. The name of the stored file is specified as YYYY-MM-DDThh:mm±hh_instance ID_action. (e.g., 2020-07-10T11:15+0900_a70e7335-a175-45d9-975a-fd2669719dfe_DROP) Charges for Object Storage used due to security group logging follow the pricing policy of the Object Storage service.
+The packet information stored in Object Storage is as follows:
 
-For more details on floating IP, see [VPC Overview](/Network/VPC/en/overview/).
+|Item|  Description
+|------|------
+|date| Log creation date and time
+|action| Action taken by security group. DROP or ACCEPT
+|ethernet| ethertype: Ethernet type<br> src: Source MAC address<br> dst: Destination MAC address
+|ipv4| src: Source IP address<br> dst: Destination IP address<br> proto: IP protocol number (1: icmp, 6: tcp, 17: udp)<br> total_length: IP packet length (IP header length + data length)<br> identification: IP header Fragment Identifier field<br> flags: IP header Fragmentation Flags field. Output in decimal
+|tcp| src_port: Source port<br> dst_port: Destination port<br> seq: Sequence number<br> ack: Acknowledgement number<br> bits: TCP Flags (URG&#124;ACK&#124;PSH&#124;RST&#124;SYN&#124;FIN) Output in decimal (e.g., SYN: 2, ACK: 16, SYN&#124;ACK: 18)
+|udp| src_port: Source port<br> dst_port: Destination port
+|icmp| type: ICMP type number<br> code: ICMP code number
 
-<a id="modify-security-group"></a>
-### Modify Security Group
 
-An instance's security groups can be modified regardless of the instance's status. Modified security groups are applied immediately.
+## Routing Table
 
-For more details on security groups, see [Security Group](./console-guide/#security-group) and [VPC Overview](/Network/VPC/en/overview/).
+Routing tables are created together with VPCs and are deleted together when VPCs are deleted. Multiple routing tables can be created in a VPC, and they can be explicitly deleted unless they are default routing tables. Subnets must be connected to at least one routing table, and multiple routing tables cannot share one internet gateway.
 
-<a id="change-network-subnet"></a>
-### Change Network Subnet
+When specifying a routing table list, summarized information is displayed on the detail screen, and you can add routes using the "Routes" tab.
 
-An instance's network subnet can only be changed while the instance is stopped. When you add a subnet, a network interface that will be connected to that subnet is automatically created on your instance. If you add multiple subnets at once, the order of the newly created network interfaces on the instance is set randomly. Deleting a subnet from an instance automatically deletes the network interface that was created along with the subnet.
+> [Note]
+> When adding routes, you must specify areas reachable within the VPC to add them. Otherwise, failure messages occur.
 
-<a id="modify-flavor"></a>
-### Modify Flavor
+* Gateways of subnets included in routing tables are automatically added.
 
-Instance flavors can be changed once an instance has been stopped. If an instance is running, click **Stop Instance** in **Additional Features** to stop the instance.
+* "Default routing tables" cannot be deleted. They are deleted together when VPCs are deleted.
 
-You can only change an instance to another flavor that is compatible with its current flavor.
+* Subnet gateways and internet gateways cannot be deleted from the route list.
 
-* m2, c2, r2, t2, x1 flavor instances can be changed to m2, c2, r2, t2, x1 flavors.
-* m2, c2, r2, t2, x1 flavor instances cannot be changed to u2 flavors.
-* u2 flavor instances cannot be changed to other flavors once they have been created, not even to those of the same u2 flavor.
+* Disconnecting routing tables from internet gateways will disconnect internet connectivity.
 
-When you modify flavors, instance resize and resize confirmation tasks proceed. When all tasks are completed, the VM changes its status to **Shutoff**. You can start the instance by clicking **Start Instance** in **Additional Features**.
 
-> [Note] The instance's root block storage size cannot be modified. If an instance requires additional block storage space, attach a block storage. For details on how to attach block storage, see [Block Storage Overview](/Storage/Block%20Storage/en/overview/).
 
-Instances will be charged using the new flavor from the moment the modification completes.
+## Peering
 
-<a id="change-instance-os-details"></a>
-### Change Instance OS Details
+Peering is a feature that connects two different VPCs. Normally, VPCs cannot communicate with each other because they have different network areas, and they can be connected using floating IPs, but this incurs additional charges based on network usage. Therefore, a feature to connect two VPCs is provided, which is called peering.
 
-You can change instance OS information regardless of the state of the instance. 
+> [Note] Peering connects two different VPCs. Connections to another VPC through a different VPC are not supported. In A <-> B <-> C connections, A and C are not connected.
 
-On the **Compute > Instance** page, click the instance whose OS information you want to change. On the **Basic Information** tab of that instance's details screen, click **OS > Modify**.
+* The IP address ranges of two VPCs cannot overlap for use.<br>
+IP address ranges should not have an inclusion relationship between one side and the other, and peering creation fails in such cases.
 
-> [Note] You can't change the OS type.
+* The size of IP address ranges does not matter, and communication is not possible with subnets not connected to the "default routing table".
 
-<a id="change-instance-description"></a>
-### Change Instance Description
- 
-You can change instance description regardless of the state of the instance. 
- 
-On the **Compute > Instance** page, click the instance whose information you want to change. On the **Basic Information** tab of that instance's details screen, click **Description > Change**.
+* Peering is charged upon connection.
 
-<a id="change-instance-key-pair"></a>
-### Change Instance Key Pair
-
-You can change the instance key pair only if the instance is active.
-
-On the **Compute > Instance** page, click the instance whose key pair information you want to change. On the **Basic Information** tab of that instance's details screen, click **Key Pair > Change**.
-
-Change the key pair of the instance default account to the selected key pair. The instance default account can be found on the **Connection Information** tab of the instance's bottom details screen.
-
-> [Caution] Changing an instance key pair deletes all public key information in the instance except for the selected key pair.
-
-> [Note] Only project members with the ADMIN permissions for the basic infrastructure can change the instance key pair, which cannot be changed if it is a Windows OS instance.
-
-> [Note] If the image version used to create the instance is low, the feature to change key pairs may not be available.
-
-<a id="manage-placement-policies"></a>
-### Manage Placement Policies
-
-You can create and delete placement policies and view a list of instances assigned to placement policies.
-
-Only the `anti-affinity` placement policy type for distributed placement is provided.
-
-You can delete a placement policy even if instances are assigned to it, in which case the instances are not deleted.
-
-<a id="key-pairs"></a>
-## Key Pairs
-
-<a id="import-key-pairs-windows"></a>
-### Import Key Pairs (Windows)
-
-You can use puttygen, which is installed when you install the PuTTY SSH client, to create a key pair and register it with NHN Cloud.
-
-Make sure you have [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) installed.
-
-Run puttygen.
-
-![Image1](http://static.toastoven.net/prod_instance/putty-ssh-001-en.png)
-
-Select **RSA** (or SSH-2 RSA in older versions of puttygen) under **Parameters**. Click **Generate** under **Actions**. Continuously move your mouse in the empty space in order to generate the key.
-
-After the key is generated, the public key file contents will be visible as shown below. Paste the contents of the public key into the **Public Key** field in **Get Key Pair** in order to register the key pair.
-
-![Image1](http://static.toastoven.net/prod_instance/putty-ssh-002-en.png)
-
-Click **Save private key** under **Actions** to save the private key. If you save the private key leaving the **Key passphrase** field blank, the message **"Are you sure you want to save this key without a passphrase to protect it?"** will appear. In order to use your converted private key more securely, set a passphrase before saving.
-
-> [Caution]
-> If you wish to be able to automatically login to your instance, you should not set a key passphrase. When a passphrase is used, you must manually enter the private key's passphrase during login.
-
-The registered key pair can be used to create instances, and the key pair's private key must be used when accessing instances. For more details on how to access instances, see [How to Access Instances](./overview/#how-to-access-instances).
-
-Just as with key pairs created from NHN Cloud, imported key pairs also need to be managed cautiously since exposed private keys can be abused by anyone to access instances.
-
-<a id="import-key-pairs-mac-and-linux"></a>
-### Import Key Pairs (Mac and Linux)
-
-Key pairs created using `ssh-keygen` in Mac or Linux can be registered with NHN Cloud. Use the following command to create a key pair.
-
-	$ ssh-keygen -t rsa -f my_key.key
-
-You can choose to set a passphrase for the key pair, although it is not required. If you wish to use your key pair more securely, we recommend setting a passphrase. The file with `.pub` appended to the specified key pair name contains the public key.
-
-	$ cat my_key.key.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnnUAe36txQqk8J7VzbNuYKVQQ3gbNoClndHMX49OD+1Rw5xrDFLUKQqxbBDtlNMoA9tKBZNrQBpKr1kFEtvMIj1HPkH9ocb4MbuoVVjpkIhixbKMMJPDQ4JQJxaifsjR59YsZyDAp0aXZp+o+OB97P3S4AKPY2kQR0JdSr30+6Av6smf+3mZceAE4abzklfbyWT5slP1im/wfYEPO3QBEDl/0JbmTjKWPYI6QnbwnPRHS63SJ+Kd2QeYQYJCadv7X4mXnw81qEIWq/dx1SQkGDTNgR7lnN2ApFlU5EZcow69z6tiCr0hlyigwjGooMg3wTZvcSlYcVeTzZ755RArd ...
-	
-Paste the contents of the public key into the **Public Key** field in **Get Key Pair** in order to register the key pair.
-
-The registered key pair can be used to create instances, and the key pair's private key must be used when accessing instances. For more details on how to access instances, see [How to Access Instances](./overview/#how-to-access-instances).
-
-Just as with key pairs created from NHN Cloud, imported key pairs also need to be managed cautiously since exposed private keys can be abused by anyone to access instances.
-
-<a id="appendix-1-change-language-packs-in-windows"></a>
-## Appendix 1. Change Language Packs in Windows
-
-NHN Cloud provides Windows images with English as the primary language. You may change your language preferences with the following steps.
-
-1. Go to **START > Control Panel > Clock, Language, and Region > Add a language**.
-![Image1](http://static.toastoven.net/prod_instance/windows1.png)
-
-2. Select **Change your language preferences > Add a language**.
-![Image1](http://static.toastoven.net/prod_instance/windows2.png)
-
-3. Choose a language in **Add a language** and click **Add**.
-![Image1](http://static.toastoven.net/prod_instance/windows3.png)
-
-4. Check the language pack just added.
-![Image1](http://static.toastoven.net/prod_instance/windows4.png)
-
-5. Download and install the language pack.
-![Image1](http://static.toastoven.net/prod_instance/windows5.png)
-
-6. Download and install updates.
-![Image1](http://static.toastoven.net/prod_instance/windows6.png)
-
-7. To change to the installed language pack, double-click the selected language or select **Options**.
-![Image1](http://static.toastoven.net/prod_instance/windows7.png)
-
-8. Choose **Make this the primary language** for Windows display language.
-![Image1](http://static.toastoven.net/prod_instance/windows8.png)
-
-9. To apply the changes, click **Log off now**.
-![Image1](http://static.toastoven.net/prod_instance/windows9.png)
-
-10. Log in again, and you can see Windows is displayed using the language pack of your choice.
-![Image1](http://static.toastoven.net/prod_instance/windows10.png)
-
-<a id="appendix-2-change-routing-in-windows"></a>
-## Appendix 2. Change Routing in Windows
-
-Routing in NHN Cloud Windows instances can be changed as follows.
-
-* Press **Windows Key + R** to open an execution window, and enter `cmd` and execute to open a command prompt window. You can enter route commands here.
-
-Route commands
-
-* Print current configuration: route print
-* Add : route add "Destination" mask "subnet" "gateway" metric "Metric value" if "Interface number"
-* Change : route change "Destination" mask "subnet" "gateway" metric "Metric value" if "Interface number"
-* Delete : route delete "Destination" mask "Destination subnet" "gateway" metric "Metric value" if "Interface number"
-* Option : -p (specify as persistent route)
-
-  
-Description
-
-![Image1](http://static.toastoven.net/prod_instance/windows_route1.png)
-
-* Metric Value: A lower value indicates higher priority
-* Interface Number: This value can be obtained from route print (red box above)
-* Persistent Route: Use the -p option to avoid the configured routes being reset across system reboots (blue box above)
-
-Example 1 - Restricting external communication for particular interfaces
-
-* You can restrict an interface from communicating externally by using the route change command to change its route metric or by leaving the default gateway field blank when configuring fixed IP settings.
-* How to Modify Metrics
-    * Increase interface metric value
-
-            $ route change 0.0.0.0 mask 0.0.0.0 172.16.5.1 metric 10 if 14 -p
-
-![Image 1](http://static.toastoven.net/prod_instance/windows_route2.png)
-
-* How to Set Fixed IP
-    1. Use the ipconfig /all command to view IP information.
-![Image 1](http://static.toastoven.net/prod_instance/windows_route3.png)
-    2. Enter the corresponding IP information, leaving the default gateway field blank, in the IP Properties window.
-![Image 1](http://static.toastoven.net/prod_instance/windows_route4.png)
-    3. Check the results using the route print command.
-![Image 1](http://static.toastoven.net/prod_instance/windows_route5.png)
-
-Example 2 - Setting routes for a particular address range
-
-* Use the route add command to set routes for a particular address range.
-
-        $ route add 172.16.0.0 mask 255.255.0.0 172.16.5.1 metric 1 if 14 -p
-
-![Image 1](http://static.toastoven.net/prod_instance/windows_route6.png)
-
-Example 3 - Removing a particular route
-
-* Use the route delete command to remove specified routes.
-
-        $ route delete 172.16.0.0 mask 255.255.0.0 172.16.5.1
-
-![Image 1](http://static.toastoven.net/prod_instance/windows_route7.png)
-
-<a id="appendix-3-change-system-locale"></a>
-## Appendix 3. Change System Locale
-
-System locale in NHN Cloud Windows instances can be changed as follows.
-
-1. Go to **Windows Key > Control Panel > Clock, Language, and Region**.
-![Image 1](http://static.toastoven.net/prod_instance/win_locale1.png)
-
-2. Select **Region**.
-![Image 1](http://static.toastoven.net/prod_instance/win_locale2.png)
-
-3. From the **Administrative** tab, click **Change system locale**.
-![Image 1](http://static.toastoven.net/prod_instance/win_locale3.png)
-
-4. Select a system locale to use.
-![Image 1](http://static.toastoven.net/prod_instance/win_locale4.png)
-
-5. Restart the system to apply the changes.
-![Image 1](http://static.toastoven.net/prod_instance/win_locale5.png)
-
-<a id="appendix-4-restarting-instances-for-hypervisor-maintenance"></a>
-## Appendix 4. Restarting Instances for Hypervisor Maintenance
-NHN Cloud updates hypervisor software on a regular basis to enhance the security and stability of infrastructure services that we provide.
-Instances running on a hypervisor that requires maintenance must be restarted and migrated to a hypervisor which has completed maintenance.
-
-To restart an instance, use the **! Restart** button that has been created next to the instance name in the console.
-`Using the "Restart Instances" button in the console or rebooting the operating system will not migrate an instance to another hypervisor.`
-Follow the guide below to use the restart feature in the console.
-
-Go to the project where your instance requiring maintenance is located.
-
-**1. Check if your instance requires maintenance.**
-
-Any instance that has the **! Restart** button before its name requires maintenance.
-Put the mouse cursor over the **! Restart** button to find maintenance schedule details.
-![Instance Maintenance Image 1](http://static.toastoven.net/prod_instance/instance_p_migration_en_1.png)    
-
-**2. Deactivate or stop application programs running on an instance which requires maintenance.**
-
-Any application programs running on an instance which requires maintenance must be deactivated or stopped in order not to impact your service.
-If there is no way to do so without impacting your service, please contact NHN Cloud Customer Center and we will provide you with guidance on appropriate measures to take.
-
-**3. Click the [! Restart] button created next to the name of the target instance.**
-
-![Instance Maintenance Image 2](http://static.toastoven.net/prod_instance/instance_p_migration_en_2.png)
-
-**4. Click [Confirm] in the Restart Instances confirmation window.**
-
-![Instance Maintenance Image3](http://static.toastoven.net/prod_instance/instance_p_migration_en_3.png)
-
-**5. Wait until the instance status turns green and the [! Restart] button disappers.**
-
-If the status does not change or the **! Restart** button is not disabled, try refreshing the page.
-
-You cannot operate or modify the instance while a restart is underway.
-If an instance restart does not complete successfully, the administrator will automatically be notified and you'll also be contacted by NHN Cloud.
+* Peering has no quota limits but consumes 1 subnet quota.
