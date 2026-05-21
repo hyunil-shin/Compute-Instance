@@ -91,11 +91,6 @@ $ terraform -v
 Terraform v1.14.2
 ```
 
-<a id="terraform-provider-provided"></a>
-## Terraform provider 제공
-
-NHN Cloud는 HashiCorp사의 공식 파트너로서 [Terraform Registry](https://registry.terraform.io/providers/nhn-cloud/nhncloud/latest)를 통해 Terraform provider를 제공합니다.
-
 
 <a id="terraform-initialization"></a>
 ## Terraform 초기화

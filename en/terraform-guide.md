@@ -90,11 +90,6 @@ $ terraform -v
 Terraform v1.14.2
 ```
 
-<a id="terraform-provider-provided"></a>
-## Terraform provider provided
-
-NHN Cloud is an official partner of HashiCorp and offers Terraform provider through [Terraform Registry](https://registry.terraform.io/providers/nhn-cloud/nhncloud/latest).
-
 <a id="terraform-initialization"></a>
 ## Terraform Initialization
 Before using Terraform, create a provider configuration file as follows.
